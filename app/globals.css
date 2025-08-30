@@ -134,3 +134,45 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* responsive background logo size: 30% on larger screens, 80% on mobile */
+.bg-logo-responsive {
+  background-size: 50% auto;
+}
+
+@media (max-width: 640px) {
+  .bg-logo-responsive {
+    background-size: 50% auto;
+  }
+}
+@media (min-width: 641px) {
+  .bg-logo-responsive {
+    background-size: 20% auto;
+  }
+}
+
+/* Add viewport-based responsive background size utility to ensure 80% of the screen on mobile */
+.bg-logo-responsive-vw {
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-attachment: scroll; /* fixed causes issues on mobile */
+}
+
+@media (max-width: 640px) {
+  .bg-logo-responsive-vw {
+    /* Use viewport width so the logo scales to the screen, not just the container */
+    background-size: 50% auto;
+    background-position: center top;
+  }
+}
+
+@media (min-width: 641px) {
+  .bg-logo-responsive-vw {
+    background-size: 20% auto;
+  }
+}
+
+/* Optional helper if your container needs full height on mobile for the background to breathe */
+.min-h-screen-mobile {
+  min-height: 100vh;
+}

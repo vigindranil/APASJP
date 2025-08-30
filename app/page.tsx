@@ -147,11 +147,14 @@ export default function WhatsAppChat() {
 
   useEffect(() => {
     // Initial welcome message
+    const now = new Date();
+const timestamp = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
     const welcomeMessage: Message = {
       id: "1",
       text: "",
       isUser: false,
-      timestamp: "23:36",
+      timestamp: timestamp,
       isWelcome: true,
       hasButtons: true,
       buttons: ["English", "বাংলা", "हिंदी"],
@@ -526,7 +529,6 @@ export default function WhatsAppChat() {
           className="fixed inset-0 top-[72px] bottom-0 pointer-events-none z-0"
           style={{
             backgroundImage: "url(/apas-removebg.png)",
-            backgroundSize: "30% auto", // ⬅️ reduce width to 80%
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center center",
             backgroundAttachment: "fixed",
