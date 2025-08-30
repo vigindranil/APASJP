@@ -1,0 +1,898 @@
+"use client"
+
+import { useState, useEffect, useRef } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { ArrowLeft, Send, Eye, Search, X } from "lucide-react"
+import Image from "next/image"
+
+interface Message {
+  id: string
+  text: string
+  isUser: boolean
+  timestamp: string
+  isWelcome?: boolean
+  hasButtons?: boolean
+  buttons?: string[]
+  isChooseList?: boolean
+}
+
+interface UserData {
+  language: string
+  blockId: number
+  blockName: string
+  wardId: number
+  wardName: string
+  boothId: number
+  boothName: string
+  name: string
+  phone: string
+  experience?: string // Added experience field
+}
+
+interface LocationItem {
+  id: number
+  name: string
+  name_bn: string
+  name_ne: string
+}
+
+const translations = {
+  English: {
+    welcome: "Namaskar",
+    welcomeMsg: "To begin the chat, select a language",
+    chooseOption: "Please choose an option:",
+    option1: "1. Know Your Camp details",
+    option2: "2. Share your experience",
+    selectBlock: "Please select your Block / Municipality",
+    selectWard: "Please select your GP / Ward",
+    selectBooth: "Please select your Electoral Booth",
+    enterName: "Please type your name",
+    enterPhone: "Please type your phone number",
+    privacyQuestion: "Do you want to reveal your name and mobile number?",
+    chooseList: "Choose list",
+    searchBlocks: "Search blocks...",
+    searchWards: "Search wards...",
+    searchBooths: "Search booths...",
+    noResults: "No results found",
+    typeName: "Type your name...",
+    typePhone: "Type your phone number...",
+    typeExperience: "Type your experience...",
+    thankYou: "Thank you for sharing your experience with us!",
+    continueQuestion: "Do you want to continue?",
+    yes: "Yes",
+    no: "No",
+    thankYouForUsing: "Thank you for using our service!",
+  },
+  বাংলা: {
+    welcome: "নমস্কার",
+    welcomeMsg: "চ্যাট আরম্ভ করতে, একটি ভাষা নির্বাচন করুন",
+    chooseOption: "অনুগ্রহ করে একটি বিকল্প বেছে নিন:",
+    option1: "১. আপনার ক্যাম্পের বিবরণ জানুন",
+    option2: "২. আপনার অভিজ্ঞতা শেয়ার করুন",
+    selectBlock: "অনুগ্রহ করে আপনার ব্লক / পৌরসভা নির্বাচন করুন",
+    selectWard: "অনুগ্রহ করে আপনার জিপি / ওয়ার্ড নির্বাচন করুন",
+    selectBooth: "অনুগ্রহ করে আপনার নির্বাচনী বুথ নির্বাচন করুন",
+    enterName: "অনুগ্রহ করে আপনার নাম লিখুন",
+    enterPhone: "অনুগ্রহ করে আপনার ফোন নম্বর লিখুন",
+    privacyQuestion: "আপনি কি আপনার নাম এবং মোবাইল নম্বর প্রকাশ করতে চান?",
+    chooseList: "তালিকা বেছে নিন",
+    searchBlocks: "ব্লক খুঁজুন...",
+    searchWards: "ওয়ার্ড খুঁজুন...",
+    searchBooths: "বুথ খুঁজুন...",
+    noResults: "কোন ফলাফল পাওয়া যায়নি",
+    typeName: "আপনার নাম লিখুন...",
+    typePhone: "আপনার ফোন নম্বর লিখুন...",
+    typeExperience: "আপনার অভিজ্ঞতা লিখুন...",
+    thankYou: "আপনার অভিজ্ঞতা আমাদের সাথে শেয়ার করার জন্য ধন্যবাদ!",
+    continueQuestion: "আপনি কি চালিয়ে যেতে চান?",
+    yes: "হ্যাঁ",
+    no: "না",
+    thankYouForUsing: "আমাদের সেবা ব্যবহার করার জন্য ধন্যবাদ!",
+  },
+  नेपाली: {
+    welcome: "नमस्ते",
+    welcomeMsg: "च्याट सुरु गर्न, कृपया भाषा चयन गर्नुहोस्",
+    chooseOption: "कृपया एक विकल्प छान्नुहोस्:",
+    option1: "१. तपाईंको क्याम्पको विवरण जान्नुहोस्",
+    option2: "२. तपाईंको अनुभव साझा गर्नुहोस्",
+    selectBlock: "कृपया तपाईंको ब्लक / नगरपालिका चयन गर्नुहोस्",
+    selectWard: "कृपया तपाईंको जीपी / वार्ड चयन गर्नुहोस्",
+    selectBooth: "कृपया तपाईंको निर्वाचन बुथ चयन गर्नुहोस्",
+    enterName: "कृपया तपाईंको नाम टाइप गर्नुहोस्",
+    enterPhone: "कृपया तपाईंको फोन नम्बर टाइप गर्नुहोस्",
+    privacyQuestion: "के तपाईं आफ्नो नाम र मोबाइल नम्बर प्रकट गर्न चाहनुहुन्छ?",
+    chooseList: "सूची छान्नुहोस्",
+    searchBlocks: "ब्लकहरू खोज्नुहोस्...",
+    searchWards: "वार्डहरू खोज्नुहोस्...",
+    searchBooths: "बुथहरू खोज्नुहोस्...",
+    noResults: "कुनै परिणाम फेला परेन",
+    typeName: "तपाईंको नाम टाइप गर्नुहोस्...",
+    typePhone: "तपाईंको फोन नम्बर टाइप गर्नुहोस्...",
+    typeExperience: "तपाईंको अनुभव टाइप गर्नुहोस्...",
+    thankYou: "तपाईंको अनुभव हामीसँग साझा गर्नुभएकोमा धन्यवाद!",
+    continueQuestion: "के तपाईं जारी राख्न चाहनुहुन्छ?",
+    yes: "हो",
+    no: "होइन",
+    thankYouForUsing: "हाम्रो सेवा प्रयोग गर्नुभएकोमा धन्यवाद!",
+  },
+}
+
+export default function WhatsAppChat() {
+  const [messages, setMessages] = useState<Message[]>([])
+  const [inputValue, setInputValue] = useState("")
+  const [currentStep, setCurrentStep] = useState("welcome")
+  const [userData, setUserData] = useState<UserData>({
+    language: "",
+    blockId: 0,
+    blockName: "",
+    wardId: 0,
+    wardName: "",
+    boothId: 0,
+    boothName: "",
+    name: "",
+    phone: "",
+  })
+
+  const [blocks, setBlocks] = useState<LocationItem[]>([])
+  const [wards, setWards] = useState<LocationItem[]>([])
+  const [booths, setBooths] = useState<LocationItem[]>([])
+  const [loading, setLoading] = useState(false)
+
+  const [showBlockList, setShowBlockList] = useState(false)
+  const [showWardList, setShowWardList] = useState(false)
+  const [showBoothList, setShowBoothList] = useState(false)
+  const [isOnline, setIsOnline] = useState(true)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const [searchTerm, setSearchTerm] = useState("")
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
+
+  useEffect(() => {
+    // Initial welcome message
+    const welcomeMessage: Message = {
+      id: "1",
+      text: "",
+      isUser: false,
+      timestamp: "23:36",
+      isWelcome: true,
+      hasButtons: true,
+      buttons: ["English", "বাংলা", "नेपाली"],
+    }
+    setMessages([welcomeMessage])
+
+    loadBlocks()
+  }, [])
+
+  const loadBlocks = async () => {
+    try {
+      setLoading(true)
+      const response = await fetch("/api/blocks")
+      const data = await response.json()
+      if (data.success) {
+        setBlocks(data.data)
+      }
+    } catch (error) {
+      console.error("Error loading blocks:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const loadWards = async (blockId: number) => {
+    try {
+      setLoading(true)
+      const response = await fetch(`/api/wards?blockId=${blockId}`)
+      const data = await response.json()
+      if (data.success) {
+        setWards(data.data)
+      }
+    } catch (error) {
+      console.error("Error loading wards:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const loadBooths = async (wardId: number) => {
+    try {
+      setLoading(true)
+      const response = await fetch(`/api/booths?wardId=${wardId}`)
+      const data = await response.json()
+      if (data.success) {
+        setBooths(data.data)
+      }
+    } catch (error) {
+      console.error("Error loading booths:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const saveUserData = async () => {
+    try {
+      setLoading(true)
+      const response = await fetch("/api/save-user-data", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      })
+      const data = await response.json()
+      if (data.success) {
+        return data.campInfo.message
+      }
+      throw new Error(data.error)
+    } catch (error) {
+      console.error("Error saving user data:", error)
+      return "Sorry, there was an error processing your request. Please try again."
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const saveUserDataWithData = async (dataToSave: UserData) => {
+    try {
+      setLoading(true)
+      console.log("[v0] Saving user data:", dataToSave) // Debug log
+      const response = await fetch("/api/save-user-data", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSave),
+      })
+      const data = await response.json()
+      console.log("[v0] API response:", data) // Debug log
+      if (data.success) {
+        return data.campInfo.message
+      }
+      throw new Error(data.error)
+    } catch (error) {
+      console.error("Error saving user data:", error)
+      return "Sorry, there was an error processing your request. Please try again."
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const saveExperience = async (experienceData: {
+    name: string
+    phone: string
+    experience: string
+    language: string
+  }) => {
+    try {
+      setLoading(true)
+      console.log("[v0] Saving experience data:", experienceData)
+      const response = await fetch("/api/save-experience", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(experienceData),
+      })
+      const data = await response.json()
+      console.log("[v0] Experience API response:", data)
+      if (data.success) {
+        return data.message
+      }
+      throw new Error(data.error)
+    } catch (error) {
+      console.error("Error saving experience:", error)
+      return "Sorry, there was an error processing your request. Please try again."
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const t = (key: keyof typeof translations.English) => {
+    const lang = userData.language as keyof typeof translations
+    return translations[lang]?.[key] || translations.English[key]
+  }
+
+  const getLocalizedName = (item: LocationItem) => {
+    const lang = userData.language
+    if (lang === "বাংলা") return item.name_bn
+    if (lang === "नेपाली") return item.name_ne
+    return item.name
+  }
+
+  const addMessage = (
+    text: string,
+    isUser: boolean,
+    hasButtons?: boolean,
+    buttons?: string[],
+    isChooseList?: boolean,
+  ) => {
+    const newMessage: Message = {
+      id: Date.now().toString(),
+      text,
+      isUser,
+      timestamp: new Date().toLocaleTimeString("en-US", {
+        hour12: false,
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+      hasButtons,
+      buttons,
+      isChooseList,
+    }
+    setMessages((prev) => [...prev, newMessage])
+  }
+
+  const handleLanguageSelect = (language: string) => {
+    setUserData((prev) => ({ ...prev, language }))
+    addMessage(language, true)
+
+    setTimeout(() => {
+      const updatedUserData = { ...userData, language }
+      const t_temp = (key: keyof typeof translations.English) => {
+        const lang = updatedUserData.language as keyof typeof translations
+        return translations[lang]?.[key] || translations.English[key]
+      }
+      addMessage(t_temp("chooseOption"), false, true, [t_temp("option1"), t_temp("option2")])
+      setCurrentStep("options")
+    }, 1000)
+  }
+
+  const handleOptionSelect = (option: string) => {
+    addMessage(option, true)
+
+    if (
+      option.includes("Know Your Camp details") ||
+      option.includes("ক্যাম্পের বিবরণ") ||
+      option.includes("क्याम्पको विवरण")
+    ) {
+      setTimeout(() => {
+        addMessage(t("selectBlock"), false, true, [t("chooseList")], true)
+        setCurrentStep("block")
+      }, 1000)
+    } else {
+      setTimeout(() => {
+        addMessage(t("privacyQuestion"), false, true, [t("yes"), t("no")])
+        setCurrentStep("experiencePrivacy")
+      }, 1000)
+    }
+  }
+
+  const handleBlockSelect = () => {
+    setShowBlockList(true)
+    setSearchTerm("")
+  }
+
+  const selectBlock = (block: LocationItem) => {
+    setUserData((prev) => ({ ...prev, blockId: block.id, blockName: block.name }))
+    addMessage(getLocalizedName(block), true)
+    setShowBlockList(false)
+    setSearchTerm("")
+
+    loadWards(block.id)
+
+    setTimeout(() => {
+      addMessage(t("selectWard"), false, true, [t("chooseList")], true)
+      setCurrentStep("ward")
+    }, 1000)
+  }
+
+  const handleWardSelect = () => {
+    setShowWardList(true)
+    setSearchTerm("")
+  }
+
+  const selectWard = (ward: LocationItem) => {
+    setUserData((prev) => ({ ...prev, wardId: ward.id, wardName: ward.name }))
+    addMessage(getLocalizedName(ward), true)
+    setShowWardList(false)
+    setSearchTerm("")
+
+    loadBooths(ward.id)
+
+    setTimeout(() => {
+      addMessage(t("selectBooth"), false, true, [t("chooseList")], true)
+      setCurrentStep("booth")
+    }, 1000)
+  }
+
+  const handleBoothSelect = () => {
+    setShowBoothList(true)
+    setSearchTerm("")
+  }
+
+  const selectBooth = (booth: LocationItem) => {
+    setUserData((prev) => ({ ...prev, boothId: booth.id, boothName: booth.name }))
+    addMessage(getLocalizedName(booth), true)
+    setShowBoothList(false)
+    setSearchTerm("")
+
+    setTimeout(() => {
+      addMessage(t("privacyQuestion"), false, true, [t("yes"), t("no")])
+      setCurrentStep("privacy")
+    }, 1000)
+  }
+
+  const handleSendMessage = async () => {
+    if (!inputValue.trim()) return
+
+    if (currentStep === "name") {
+      setUserData((prev) => ({ ...prev, name: inputValue }))
+      addMessage(inputValue, true)
+      setInputValue("")
+
+      setTimeout(() => {
+        addMessage(t("enterPhone"), false)
+        setCurrentStep("phone")
+      }, 1000)
+    } else if (currentStep === "phone") {
+      const updatedUserData = { ...userData, phone: inputValue }
+      setUserData(updatedUserData)
+      addMessage(inputValue, true)
+      setInputValue("")
+
+      const campMessage = await saveUserDataWithData(updatedUserData)
+      setTimeout(() => {
+        addMessage(campMessage, false)
+        setTimeout(() => {
+          addMessage(t("continueQuestion"), false, true, [t("yes"), t("no")])
+          setCurrentStep("continue")
+        }, 2000)
+      }, 1000)
+    } else if (currentStep === "experienceName") {
+      setUserData((prev) => ({ ...prev, name: inputValue }))
+      addMessage(inputValue, true)
+      setInputValue("")
+
+      setTimeout(() => {
+        addMessage(t("enterPhone"), false)
+        setCurrentStep("experiencePhone")
+      }, 1000)
+    } else if (currentStep === "experiencePhone") {
+      setUserData((prev) => ({ ...prev, phone: inputValue }))
+      addMessage(inputValue, true)
+      setInputValue("")
+
+      setTimeout(() => {
+        addMessage(t("typeExperience"), false)
+        setCurrentStep("experience")
+      }, 1000)
+    } else if (currentStep === "experience") {
+      const experienceData = {
+        name: userData.name,
+        phone: userData.phone,
+        experience: inputValue,
+        language: userData.language,
+      }
+
+      addMessage(inputValue, true)
+      setInputValue("")
+
+      const responseMessage = await saveExperience(experienceData)
+      setTimeout(() => {
+        addMessage(responseMessage, false)
+        setTimeout(() => {
+          addMessage(t("continueQuestion"), false, true, [t("yes"), t("no")])
+          setCurrentStep("continue")
+        }, 2000)
+      }, 1000)
+    }
+  }
+
+  const handlePrivacySelect = async (option: string) => {
+    addMessage(option, true)
+
+    if (option.includes("Yes") || option.includes("হ্যাঁ") || option.includes("हो")) {
+      // User wants to reveal personal info - ask for name and phone
+      setTimeout(() => {
+        addMessage(t("enterName"), false)
+        setCurrentStep("name")
+      }, 1000)
+    } else {
+      // User doesn't want to reveal personal info - save with blank data
+      const updatedUserData = { ...userData, name: "", phone: "" }
+      setUserData(updatedUserData)
+
+      const campMessage = await saveUserDataWithData(updatedUserData)
+      setTimeout(() => {
+        addMessage(campMessage, false)
+        setTimeout(() => {
+          addMessage(t("continueQuestion"), false, true, [t("yes"), t("no")])
+          setCurrentStep("continue")
+        }, 2000)
+      }, 1000)
+    }
+  }
+
+  const handleExperiencePrivacySelect = async (option: string) => {
+    addMessage(option, true)
+
+    if (option.includes("Yes") || option.includes("হ্যাঁ") || option.includes("हो")) {
+      // User wants to reveal personal info - ask for name and phone
+      setTimeout(() => {
+        addMessage(t("enterName"), false)
+        setCurrentStep("experienceName")
+      }, 1000)
+    } else {
+      // User doesn't want to reveal personal info - go directly to experience input
+      setUserData((prev) => ({ ...prev, name: "", phone: "" }))
+      setTimeout(() => {
+        addMessage(t("typeExperience"), false)
+        setCurrentStep("experience")
+      }, 1000)
+    }
+  }
+
+  const handleContinueSelect = (option: string) => {
+    addMessage(option, true)
+
+    if (option.includes("Yes") || option.includes("হ্যাঁ") || option.includes("हो")) {
+      setTimeout(() => {
+        setUserData({
+          language: "",
+          blockId: 0,
+          blockName: "",
+          wardId: 0,
+          wardName: "",
+          boothId: 0,
+          boothName: "",
+          name: "",
+          phone: "",
+        })
+        setCurrentStep("welcome")
+
+        const welcomeMessage: Message = {
+          id: Date.now().toString(),
+          text: "",
+          isUser: false,
+          timestamp: new Date().toLocaleTimeString("en-US", {
+            hour12: false,
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+          isWelcome: true,
+          hasButtons: true,
+          buttons: ["English", "বাংলা", "नेपाली"],
+        }
+        setMessages((prev) => [...prev, welcomeMessage])
+      }, 1000)
+    } else {
+      setTimeout(() => {
+        addMessage(t("thankYouForUsing"), false)
+        setCurrentStep("ended")
+      }, 1000)
+    }
+  }
+
+  const getFilteredList = (list: LocationItem[]) => {
+    if (!searchTerm) return list
+    return list.filter(
+      (item) =>
+        getLocalizedName(item).toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+    )
+  }
+
+  return (
+    <div className="flex flex-col h-screen bg-[var(--whatsapp-bg)] max-w-md mx-auto shadow-2xl relative">
+      {/* Header */}
+      <div className="bg-[var(--whatsapp-dark-green)] text-white p-4 flex items-center gap-3 shadow-lg">
+        <ArrowLeft className="w-6 h-6" />
+        <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center overflow-hidden">
+          <Image
+            src="/darjeeling-logo.png"
+            alt="Jalpaiguri Logo"
+            width={32}
+            height={32}
+            className="rounded-full object-cover"
+          />
+        </div>
+        <div className="flex-1">
+          <h1 className="font-medium text-base">Amader Para Amader Samadhan Jalpaiguri</h1>
+          <p className="text-xs text-white/80 flex items-center gap-1">
+            {isOnline ? (
+              <>
+                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                online
+              </>
+            ) : (
+              "last seen recently"
+            )}
+          </p>
+        </div>
+        <div className="flex gap-2">
+          <Eye className="w-5 h-5 opacity-80 hover:opacity-100 transition-opacity" />
+          <div className="flex gap-1">
+            <div className="w-1 h-1 bg-white/60 rounded-full"></div>
+            <div className="w-1 h-1 bg-white/60 rounded-full"></div>
+            <div className="w-1 h-1 bg-white/60 rounded-full"></div>
+          </div>
+        </div>
+      </div>
+
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-3 pb-20">
+        {messages.map((message) => (
+          <div key={message.id}>
+            {message.isWelcome ? (
+              <div className="flex justify-start">
+                <div className="bg-white rounded-2xl p-6 max-w-xs shadow-lg border border-gray-100">
+                  <div className="flex justify-center mb-6">
+                    <div className="relative">
+                      <Image
+                        src="/darjeeling-logo.png"
+                        alt="Jalpaiguri Logo"
+                        width={100}
+                        height={100}
+                        className="rounded-full shadow-md"
+                      />
+                      <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-center space-y-3 text-sm leading-relaxed">
+                    <div className="space-y-1">
+                      <p className="font-semibold text-gray-800">{t("welcome")}</p>
+                      <p className="text-gray-600">{t("welcomeMsg")}</p>
+                    </div>
+                  </div>
+                  {message.hasButtons && (
+                    <div className="flex gap-2 mt-6 justify-center">
+                      {message.buttons?.map((button, index) => (
+                        <Button
+                          key={index}
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleLanguageSelect(button)}
+                          className="text-sm px-4 py-2 border-2 border-[var(--whatsapp-green)] text-gray-800 bg-white font-medium hover:bg-[var(--whatsapp-green)] hover:text-white transition-all duration-200 rounded-full shadow-sm hover:shadow-md"
+                        >
+                          {button}
+                        </Button>
+                      ))}
+                    </div>
+                  )}
+                  <div className="text-xs text-[var(--whatsapp-timestamp)] text-right mt-3">{message.timestamp}</div>
+                </div>
+              </div>
+            ) : (
+              <div className={`flex ${message.isUser ? "justify-end" : "justify-start"}`}>
+                <div
+                  className={`rounded-2xl p-4 max-w-xs shadow-md ${
+                    message.isUser
+                      ? "bg-[var(--whatsapp-light-green)] text-black rounded-br-md"
+                      : "bg-white text-black rounded-bl-md border border-gray-100"
+                  }`}
+                >
+                  <p className="text-sm whitespace-pre-wrap leading-relaxed">{message.text}</p>
+                  {message.hasButtons && (
+                    <div className="flex flex-col gap-3 mt-4">
+                      {message.buttons?.map((button, index) => (
+                        <Button
+                          key={index}
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            if (currentStep === "options") {
+                              handleOptionSelect(button)
+                            } else if (currentStep === "block" && message.isChooseList) {
+                              handleBlockSelect()
+                            } else if (currentStep === "ward" && message.isChooseList) {
+                              handleWardSelect()
+                            } else if (currentStep === "booth" && message.isChooseList) {
+                              handleBoothSelect()
+                            } else if (currentStep === "continue") {
+                              handleContinueSelect(button)
+                            } else if (currentStep === "privacy") {
+                              handlePrivacySelect(button)
+                            } else if (currentStep === "experiencePrivacy") {
+                              handleExperiencePrivacySelect(button)
+                            }
+                          }}
+                          className="text-sm px-4 py-2 border-2 border-[var(--whatsapp-green)] text-gray-800 bg-white font-medium hover:bg-[var(--whatsapp-green)] hover:text-white transition-all duration-200 rounded-full shadow-sm hover:shadow-md"
+                        >
+                          {button}
+                        </Button>
+                      ))}
+                    </div>
+                  )}
+                  <div className="text-xs text-[var(--whatsapp-timestamp)] text-right mt-2 flex items-center justify-end gap-1">
+                    {message.timestamp}
+                    {message.isUser && <span className="text-blue-500">✓✓</span>}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+        <div ref={messagesEndRef} />
+      </div>
+
+      {(currentStep === "name" ||
+        currentStep === "phone" ||
+        currentStep === "experienceName" ||
+        currentStep === "experiencePhone" ||
+        currentStep === "experience") && (
+        <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md p-4 bg-[var(--whatsapp-bg)] border-t border-gray-200">
+          <div className="flex gap-3 items-center">
+            <div className="flex-1 relative">
+              <Input
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder={
+                  currentStep === "name" || currentStep === "experienceName"
+                    ? t("typeName")
+                    : currentStep === "phone" || currentStep === "experiencePhone"
+                      ? t("typePhone")
+                      : currentStep === "experience"
+                        ? t("typeExperience")
+                        : ""
+                }
+                className="rounded-full border-none bg-white pr-12 shadow-sm focus:shadow-md transition-shadow"
+                onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+                disabled={loading}
+              />
+            </div>
+            <Button
+              onClick={handleSendMessage}
+              size="icon"
+              disabled={loading}
+              className="rounded-full bg-[var(--whatsapp-green)] hover:bg-[var(--whatsapp-green)]/90 shadow-lg hover:shadow-xl transition-all duration-200"
+            >
+              <Send className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {showBlockList && (
+        <div className="fixed inset-0 bg-black/60 flex items-end justify-center backdrop-blur-sm z-50">
+          <div className="bg-white rounded-t-3xl p-6 w-full max-w-md max-h-[80vh] flex flex-col shadow-2xl animate-in slide-in-from-bottom duration-300">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-semibold text-lg text-gray-800">{t("selectBlock")}</h3>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => {
+                  setShowBlockList(false)
+                  setSearchTerm("")
+                }}
+                className="rounded-full hover:bg-gray-100"
+              >
+                <X className="w-5 h-5" />
+              </Button>
+            </div>
+            <div className="relative mb-4">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Input
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder={t("searchBlocks")}
+                className="pl-10 rounded-full border-gray-200 focus:border-[var(--whatsapp-green)]"
+              />
+            </div>
+            <div className="flex-1 overflow-y-auto space-y-1">
+              {loading ? (
+                <p className="text-center text-gray-500 py-4">Loading...</p>
+              ) : getFilteredList(blocks).length > 0 ? (
+                getFilteredList(blocks).map((block) => (
+                  <Button
+                    key={block.id}
+                    variant="ghost"
+                    className="w-full justify-start rounded-xl hover:bg-[var(--whatsapp-green)]/10 hover:text-[var(--whatsapp-green)] transition-colors p-3"
+                    onClick={() => selectBlock(block)}
+                  >
+                    {getLocalizedName(block)}
+                  </Button>
+                ))
+              ) : (
+                <p className="text-center text-gray-500 py-4">{t("noResults")}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showWardList && (
+        <div className="fixed inset-0 bg-black/60 flex items-end justify-center backdrop-blur-sm z-50">
+          <div className="bg-white rounded-t-3xl p-6 w-full max-w-md max-h-[80vh] flex flex-col shadow-2xl animate-in slide-in-from-bottom duration-300">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-semibold text-lg text-gray-800">{t("selectWard")}</h3>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => {
+                  setShowWardList(false)
+                  setSearchTerm("")
+                }}
+                className="rounded-full hover:bg-gray-100"
+              >
+                <X className="w-5 h-5" />
+              </Button>
+            </div>
+            <div className="relative mb-4">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Input
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder={t("searchWards")}
+                className="pl-10 rounded-full border-gray-200 focus:border-[var(--whatsapp-green)]"
+              />
+            </div>
+            <div className="flex-1 overflow-y-auto space-y-1">
+              {loading ? (
+                <p className="text-center text-gray-500 py-4">Loading...</p>
+              ) : getFilteredList(wards).length > 0 ? (
+                getFilteredList(wards).map((ward) => (
+                  <Button
+                    key={ward.id}
+                    variant="ghost"
+                    className="w-full justify-start rounded-xl hover:bg-[var(--whatsapp-green)]/10 hover:text-[var(--whatsapp-green)] transition-colors p-3"
+                    onClick={() => selectWard(ward)}
+                  >
+                    {getLocalizedName(ward)}
+                  </Button>
+                ))
+              ) : (
+                <p className="text-center text-gray-500 py-4">{t("noResults")}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showBoothList && (
+        <div className="fixed inset-0 bg-black/60 flex items-end justify-center backdrop-blur-sm z-50">
+          <div className="bg-white rounded-t-3xl p-6 w-full max-w-md max-h-[80vh] flex flex-col shadow-2xl animate-in slide-in-from-bottom duration-300">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-semibold text-lg text-gray-800">{t("selectBooth")}</h3>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => {
+                  setShowBoothList(false)
+                  setSearchTerm("")
+                }}
+                className="rounded-full hover:bg-gray-100"
+              >
+                <X className="w-5 h-5" />
+              </Button>
+            </div>
+            <div className="relative mb-4">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Input
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder={t("searchBooths")}
+                className="pl-10 rounded-full border-gray-200 focus:border-[var(--whatsapp-green)]"
+              />
+            </div>
+            <div className="flex-1 overflow-y-auto space-y-1">
+              {loading ? (
+                <p className="text-center text-gray-500 py-4">Loading...</p>
+              ) : getFilteredList(booths).length > 0 ? (
+                getFilteredList(booths).map((booth) => (
+                  <Button
+                    key={booth.id}
+                    variant="ghost"
+                    className="w-full justify-start rounded-xl hover:bg-[var(--whatsapp-green)]/10 hover:text-[var(--whatsapp-green)] transition-colors p-3"
+                    onClick={() => selectBooth(booth)}
+                  >
+                    {getLocalizedName(booth)}
+                  </Button>
+                ))
+              ) : (
+                <p className="text-center text-gray-500 py-4">{t("noResults")}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
