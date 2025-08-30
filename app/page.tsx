@@ -47,19 +47,16 @@ const translations = {
     selectBlock: "Please select your Block / Municipality",
     selectWard: "Please select your GP / Ward",
     selectBooth: "Please select your Electoral Booth",
-    enterName: "Please type your name",
-    enterPhone: "Please type your phone number",
-    privacyQuestion: "Do you want to reveal your name and mobile number?",
+    sharePhone: "Share your Mobile Number",
     chooseList: "Choose list",
     searchBlocks: "Search blocks...",
     searchWards: "Search wards...",
     searchBooths: "Search booths...",
     noResults: "No results found",
-    typeName: "Type your name...",
     typePhone: "Type your phone number...",
     typeExperience: "Type your experience...",
     thankYou: "Thank you for sharing your experience with us!",
-    continueQuestion: "Do you want to continue?",
+    moreDetailsQuestion: 'Know more details about "Amader Para Amader Samadhan"?',
     yes: "Yes",
     no: "No",
     thankYouForUsing: "Thank you for using our service!",
@@ -73,48 +70,42 @@ const translations = {
     selectBlock: "অনুগ্রহ করে আপনার ব্লক / পৌরসভা নির্বাচন করুন",
     selectWard: "অনুগ্রহ করে আপনার জিপি / ওয়ার্ড নির্বাচন করুন",
     selectBooth: "অনুগ্রহ করে আপনার নির্বাচনী বুথ নির্বাচন করুন",
-    enterName: "অনুগ্রহ করে আপনার নাম লিখুন",
-    enterPhone: "অনুগ্রহ করে আপনার ফোন নম্বর লিখুন",
-    privacyQuestion: "আপনি কি আপনার নাম এবং মোবাইল নম্বর প্রকাশ করতে চান?",
+    sharePhone: "আপনার মোবাইল নম্বর শেয়ার করুন",
     chooseList: "তালিকা বেছে নিন",
     searchBlocks: "ব্লক খুঁজুন...",
     searchWards: "ওয়ার্ড খুঁজুন...",
     searchBooths: "বুথ খুঁজুন...",
     noResults: "কোন ফলাফল পাওয়া যায়নি",
-    typeName: "আপনার নাম লিখুন...",
     typePhone: "আপনার ফোন নম্বর লিখুন...",
     typeExperience: "আপনার অভিজ্ঞতা লিখুন...",
     thankYou: "আপনার অভিজ্ঞতা আমাদের সাথে শেয়ার করার জন্য ধন্যবাদ!",
-    continueQuestion: "আপনি কি চালিয়ে যেতে চান?",
+    moreDetailsQuestion: '"আমাদের পাড়া আমাদের সমাধান" সম্পর্কে আরও বিস্তারিত জানতে চান?',
     yes: "হ্যাঁ",
     no: "না",
     thankYouForUsing: "আমাদের সেবা ব্যবহার করার জন্য ধন্যবাদ!",
   },
-  नेपाली: {
-    welcome: "नमस्ते",
-    welcomeMsg: "च्याट सुरु गर्न, कृपया भाषा चयन गर्नुहोस्",
-    chooseOption: "कृपया एक विकल्प छान्नुहोस्:",
-    option1: "१. तपाईंको क्याम्पको विवरण जान्नुहोस्",
-    option2: "२. तपाईंको अनुभव साझा गर्नुहोस्",
-    selectBlock: "कृपया तपाईंको ब्लक / नगरपालिका चयन गर्नुहोस्",
-    selectWard: "कृपया तपाईंको जीपी / वार्ड चयन गर्नुहोस्",
-    selectBooth: "कृपया तपाईंको निर्वाचन बुथ चयन गर्नुहोस्",
-    enterName: "कृपया तपाईंको नाम टाइप गर्नुहोस्",
-    enterPhone: "कृपया तपाईंको फोन नम्बर टाइप गर्नुहोस्",
-    privacyQuestion: "के तपाईं आफ्नो नाम र मोबाइल नम्बर प्रकट गर्न चाहनुहुन्छ?",
-    chooseList: "सूची छान्नुहोस्",
-    searchBlocks: "ब्लकहरू खोज्नुहोस्...",
-    searchWards: "वार्डहरू खोज्नुहोस्...",
-    searchBooths: "बुथहरू खोज्नुहोस्...",
-    noResults: "कुनै परिणाम फेला परेन",
-    typeName: "तपाईंको नाम टाइप गर्नुहोस्...",
-    typePhone: "तपाईंको फोन नम्बर टाइप गर्नुहोस्...",
-    typeExperience: "तपाईंको अनुभव टाइप गर्नुहोस्...",
-    thankYou: "तपाईंको अनुभव हामीसँग साझा गर्नुभएकोमा धन्यवाद!",
-    continueQuestion: "के तपाईं जारी राख्न चाहनुहुन्छ?",
-    yes: "हो",
-    no: "होइन",
-    thankYouForUsing: "हाम्रो सेवा प्रयोग गर्नुभएकोमा धन्यवाद!",
+  हिंदी: {
+    welcome: "नमस्कार",
+    welcomeMsg: "चैट शुरू करने के लिए, कृपया एक भाषा चुनें",
+    chooseOption: "कृपया एक विकल्प चुनें:",
+    option1: "१. अपने कैंप की जानकारी जानें",
+    option2: "२. अपना अनुभव साझा करें",
+    selectBlock: "कृपया अपना ब्लॉक / नगरपालिका चुनें",
+    selectWard: "कृपया अपना जीपी / वार्ड चुनें",
+    selectBooth: "कृपया अपना चुनावी बूथ चुनें",
+    sharePhone: "अपना मोबाइल नंबर साझा करें",
+    chooseList: "सूची चुनें",
+    searchBlocks: "ब्लॉक खोजें...",
+    searchWards: "वार्ड खोजें...",
+    searchBooths: "बूथ खोजें...",
+    noResults: "कोई परिणाम नहीं मिला",
+    typePhone: "अपना फोन नंबर टाइप करें...",
+    typeExperience: "अपना अनुभव टाइप करें...",
+    thankYou: "अपना अनुभव हमारे साथ साझा करने के लिए धन्यवाद!",
+    moreDetailsQuestion: '"हमारा पाड़ा हमारा समाधान" के बारे में और जानना चाहते हैं?',
+    yes: "हाँ",
+    no: "नहीं",
+    thankYouForUsing: "हमारी सेवा का उपयोग करने के लिए धन्यवाद!",
   },
 }
 
@@ -163,7 +154,7 @@ export default function WhatsAppChat() {
       timestamp: "23:36",
       isWelcome: true,
       hasButtons: true,
-      buttons: ["English", "বাংলা", "नेपाली"],
+      buttons: ["English", "বাংলা", "हिंदी"],
     }
     setMessages([welcomeMessage])
 
@@ -346,19 +337,21 @@ export default function WhatsAppChat() {
   const handleOptionSelect = (option: string) => {
     addMessage(option, true)
 
-    if (
-      option.includes("Know Your Camp details") ||
-      option.includes("ক্যাম্পের বিবরণ") ||
-      option.includes("क्याम्पको विवरण")
-    ) {
+    if (option === t("option1")) {
       setTimeout(() => {
         addMessage(t("selectBlock"), false, true, [t("chooseList")], true)
         setCurrentStep("block")
       }, 1000)
-    } else {
+    } else if (option === t("option2")) {
       setTimeout(() => {
-        addMessage(t("privacyQuestion"), false, true, [t("yes"), t("no")])
-        setCurrentStep("experiencePrivacy")
+        addMessage(t("sharePhone"), false)
+        setCurrentStep("experiencePhone")
+      }, 1000)
+    } else {
+      // Fallback: default to experience path if an unrecognized option arrives
+      setTimeout(() => {
+        addMessage(t("sharePhone"), false)
+        setCurrentStep("experiencePhone")
       }, 1000)
     }
   }
@@ -413,25 +406,16 @@ export default function WhatsAppChat() {
     setSearchTerm("")
 
     setTimeout(() => {
-      addMessage(t("privacyQuestion"), false, true, [t("yes"), t("no")])
-      setCurrentStep("privacy")
+      addMessage(t("sharePhone"), false)
+      setCurrentStep("phone")
     }, 1000)
   }
 
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return
 
-    if (currentStep === "name") {
-      setUserData((prev) => ({ ...prev, name: inputValue }))
-      addMessage(inputValue, true)
-      setInputValue("")
-
-      setTimeout(() => {
-        addMessage(t("enterPhone"), false)
-        setCurrentStep("phone")
-      }, 1000)
-    } else if (currentStep === "phone") {
-      const updatedUserData = { ...userData, phone: inputValue }
+    if (currentStep === "phone") {
+      const updatedUserData = { ...userData, name: "", phone: inputValue }
       setUserData(updatedUserData)
       addMessage(inputValue, true)
       setInputValue("")
@@ -440,21 +424,12 @@ export default function WhatsAppChat() {
       setTimeout(() => {
         addMessage(campMessage, false)
         setTimeout(() => {
-          addMessage(t("continueQuestion"), false, true, [t("yes"), t("no")])
+          addMessage(t("moreDetailsQuestion"), false, true, [t("yes"), t("no")])
           setCurrentStep("continue")
         }, 2000)
       }, 1000)
-    } else if (currentStep === "experienceName") {
-      setUserData((prev) => ({ ...prev, name: inputValue }))
-      addMessage(inputValue, true)
-      setInputValue("")
-
-      setTimeout(() => {
-        addMessage(t("enterPhone"), false)
-        setCurrentStep("experiencePhone")
-      }, 1000)
     } else if (currentStep === "experiencePhone") {
-      setUserData((prev) => ({ ...prev, phone: inputValue }))
+      setUserData((prev) => ({ ...prev, name: "", phone: inputValue }))
       addMessage(inputValue, true)
       setInputValue("")
 
@@ -464,7 +439,7 @@ export default function WhatsAppChat() {
       }, 1000)
     } else if (currentStep === "experience") {
       const experienceData = {
-        name: userData.name,
+        name: "",
         phone: userData.phone,
         experience: inputValue,
         language: userData.language,
@@ -477,53 +452,9 @@ export default function WhatsAppChat() {
       setTimeout(() => {
         addMessage(responseMessage, false)
         setTimeout(() => {
-          addMessage(t("continueQuestion"), false, true, [t("yes"), t("no")])
+          addMessage(t("moreDetailsQuestion"), false, true, [t("yes"), t("no")])
           setCurrentStep("continue")
         }, 2000)
-      }, 1000)
-    }
-  }
-
-  const handlePrivacySelect = async (option: string) => {
-    addMessage(option, true)
-
-    if (option.includes("Yes") || option.includes("হ্যাঁ") || option.includes("हो")) {
-      // User wants to reveal personal info - ask for name and phone
-      setTimeout(() => {
-        addMessage(t("enterName"), false)
-        setCurrentStep("name")
-      }, 1000)
-    } else {
-      // User doesn't want to reveal personal info - save with blank data
-      const updatedUserData = { ...userData, name: "", phone: "" }
-      setUserData(updatedUserData)
-
-      const campMessage = await saveUserDataWithData(updatedUserData)
-      setTimeout(() => {
-        addMessage(campMessage, false)
-        setTimeout(() => {
-          addMessage(t("continueQuestion"), false, true, [t("yes"), t("no")])
-          setCurrentStep("continue")
-        }, 2000)
-      }, 1000)
-    }
-  }
-
-  const handleExperiencePrivacySelect = async (option: string) => {
-    addMessage(option, true)
-
-    if (option.includes("Yes") || option.includes("হ্যাঁ") || option.includes("हो")) {
-      // User wants to reveal personal info - ask for name and phone
-      setTimeout(() => {
-        addMessage(t("enterName"), false)
-        setCurrentStep("experienceName")
-      }, 1000)
-    } else {
-      // User doesn't want to reveal personal info - go directly to experience input
-      setUserData((prev) => ({ ...prev, name: "", phone: "" }))
-      setTimeout(() => {
-        addMessage(t("typeExperience"), false)
-        setCurrentStep("experience")
       }, 1000)
     }
   }
@@ -531,35 +462,15 @@ export default function WhatsAppChat() {
   const handleContinueSelect = (option: string) => {
     addMessage(option, true)
 
-    if (option.includes("Yes") || option.includes("হ্যাঁ") || option.includes("हो")) {
+    if (option === t("yes")) {
       setTimeout(() => {
-        setUserData({
-          language: "",
-          blockId: 0,
-          blockName: "",
-          wardId: 0,
-          wardName: "",
-          boothId: 0,
-          boothName: "",
-          name: "",
-          phone: "",
-        })
-        setCurrentStep("welcome")
+        const link = document.createElement("a")
+        link.href = "/amader-para-amader-samadhan-details.pdf"
+        link.download = "Amader Para Amader Samadhan Details.pdf"
+        link.click()
 
-        const welcomeMessage: Message = {
-          id: Date.now().toString(),
-          text: "",
-          isUser: false,
-          timestamp: new Date().toLocaleTimeString("en-US", {
-            hour12: false,
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
-          isWelcome: true,
-          hasButtons: true,
-          buttons: ["English", "বাংলা", "नेपाली"],
-        }
-        setMessages((prev) => [...prev, welcomeMessage])
+        addMessage("PDF download started. Thank you for your interest!", false)
+        setCurrentStep("ended")
       }, 1000)
     } else {
       setTimeout(() => {
@@ -584,13 +495,7 @@ export default function WhatsAppChat() {
       <div className="bg-[var(--whatsapp-dark-green)] text-white p-4 flex items-center gap-3 shadow-lg">
         <ArrowLeft className="w-6 h-6" />
         <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center overflow-hidden">
-          <Image
-            src="/darjeeling-logo.png"
-            alt="Jalpaiguri Logo"
-            width={32}
-            height={32}
-            className="rounded-full object-cover"
-          />
+          <Image src="/apas.jpg" alt="Jalpaiguri Logo" width={32} height={32} className="rounded-full object-cover" />
         </div>
         <div className="flex-1">
           <h1 className="font-medium text-base">Amader Para Amader Samadhan Jalpaiguri</h1>
@@ -616,108 +521,113 @@ export default function WhatsAppChat() {
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3 pb-20">
-        {messages.map((message) => (
-          <div key={message.id}>
-            {message.isWelcome ? (
-              <div className="flex justify-start">
-                <div className="bg-white rounded-2xl p-6 max-w-xs shadow-lg border border-gray-100">
-                  <div className="flex justify-center mb-6">
-                    <div className="relative">
-                      <Image
-                        src="/darjeeling-logo.png"
-                        alt="Jalpaiguri Logo"
-                        width={100}
-                        height={100}
-                        className="rounded-full shadow-md"
-                      />
-                      <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
+      <div className="flex-1 overflow-y-auto p-4 space-y-3 pb-20 relative">
+        <div
+          className="fixed inset-0 top-[72px] bottom-0 pointer-events-none z-0"
+          style={{
+            backgroundImage: "url(/apas-removebg.png)",
+            backgroundSize: "30% auto", // ⬅️ reduce width to 80%
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center center",
+            backgroundAttachment: "fixed",
+          }}
+        />
+
+        <div className="relative z-10">
+          {messages.map((message) => (
+            <div key={message.id}>
+              {message.isWelcome ? (
+                <div className="flex justify-start">
+                  <div className="bg-white rounded-2xl p-6 max-w-xs shadow-lg border border-gray-100">
+                    <div className="flex justify-center mb-6">
+                      <div className="relative">
+                        <Image
+                          src="/darjeeling-logo.png"
+                          alt="Jalpaiguri Logo"
+                          width={100}
+                          height={100}
+                          className="rounded-full shadow-md"
+                        />
+                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                          <div className="w-2 h-2 bg-white rounded-full"></div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="text-center space-y-3 text-sm leading-relaxed">
-                    <div className="space-y-1">
-                      <p className="font-semibold text-gray-800">{t("welcome")}</p>
-                      <p className="text-gray-600">{t("welcomeMsg")}</p>
+                    <div className="text-center space-y-3 text-sm leading-relaxed">
+                      <div className="space-y-1">
+                        <p className="font-semibold text-gray-800">{t("welcome")}</p>
+                        <p className="text-gray-600">{t("welcomeMsg")}</p>
+                      </div>
                     </div>
-                  </div>
-                  {message.hasButtons && (
-                    <div className="flex gap-2 mt-6 justify-center">
-                      {message.buttons?.map((button, index) => (
-                        <Button
-                          key={index}
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleLanguageSelect(button)}
-                          className="text-sm px-4 py-2 border-2 border-[var(--whatsapp-green)] text-gray-800 bg-white font-medium hover:bg-[var(--whatsapp-green)] hover:text-white transition-all duration-200 rounded-full shadow-sm hover:shadow-md"
-                        >
-                          {button}
-                        </Button>
-                      ))}
-                    </div>
-                  )}
-                  <div className="text-xs text-[var(--whatsapp-timestamp)] text-right mt-3">{message.timestamp}</div>
-                </div>
-              </div>
-            ) : (
-              <div className={`flex ${message.isUser ? "justify-end" : "justify-start"}`}>
-                <div
-                  className={`rounded-2xl p-4 max-w-xs shadow-md ${
-                    message.isUser
-                      ? "bg-[var(--whatsapp-light-green)] text-black rounded-br-md"
-                      : "bg-white text-black rounded-bl-md border border-gray-100"
-                  }`}
-                >
-                  <p className="text-sm whitespace-pre-wrap leading-relaxed">{message.text}</p>
-                  {message.hasButtons && (
-                    <div className="flex flex-col gap-3 mt-4">
-                      {message.buttons?.map((button, index) => (
-                        <Button
-                          key={index}
-                          variant="outline"
-                          size="sm"
-                          onClick={() => {
-                            if (currentStep === "options") {
-                              handleOptionSelect(button)
-                            } else if (currentStep === "block" && message.isChooseList) {
-                              handleBlockSelect()
-                            } else if (currentStep === "ward" && message.isChooseList) {
-                              handleWardSelect()
-                            } else if (currentStep === "booth" && message.isChooseList) {
-                              handleBoothSelect()
-                            } else if (currentStep === "continue") {
-                              handleContinueSelect(button)
-                            } else if (currentStep === "privacy") {
-                              handlePrivacySelect(button)
-                            } else if (currentStep === "experiencePrivacy") {
-                              handleExperiencePrivacySelect(button)
-                            }
-                          }}
-                          className="text-sm px-4 py-2 border-2 border-[var(--whatsapp-green)] text-gray-800 bg-white font-medium hover:bg-[var(--whatsapp-green)] hover:text-white transition-all duration-200 rounded-full shadow-sm hover:shadow-md"
-                        >
-                          {button}
-                        </Button>
-                      ))}
-                    </div>
-                  )}
-                  <div className="text-xs text-[var(--whatsapp-timestamp)] text-right mt-2 flex items-center justify-end gap-1">
-                    {message.timestamp}
-                    {message.isUser && <span className="text-blue-500">✓✓</span>}
+                    {message.hasButtons && (
+                      <div className="flex gap-2 mt-6 justify-center">
+                        {message.buttons?.map((button, index) => (
+                          <Button
+                            key={index}
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleLanguageSelect(button)}
+                            className="text-sm px-4 py-2 border-2 border-[var(--whatsapp-green)] text-gray-800 bg-white font-medium hover:bg-[var(--whatsapp-green)] hover:text-white transition-all duration-200 rounded-full shadow-sm hover:shadow-md"
+                          >
+                            {button}
+                          </Button>
+                        ))}
+                      </div>
+                    )}
+                    <div className="text-xs text-[var(--whatsapp-timestamp)] text-right mt-3">{message.timestamp}</div>
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
-        ))}
-        <div ref={messagesEndRef} />
+              ) : (
+                <div className={`flex ${message.isUser ? "justify-end" : "justify-start"}`}>
+                  <div
+                    className={`rounded-2xl p-4 max-w-xs shadow-md ${
+                      message.isUser
+                        ? "bg-[var(--whatsapp-light-green)] text-black rounded-br-md"
+                        : "bg-white text-black rounded-bl-md border border-gray-100"
+                    }`}
+                  >
+                    <p className="text-sm whitespace-pre-wrap leading-relaxed">{message.text}</p>
+                    {message.hasButtons && (
+                      <div className="flex flex-col gap-3 mt-4">
+                        {message.buttons?.map((button, index) => (
+                          <Button
+                            key={index}
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
+                              if (currentStep === "options") {
+                                handleOptionSelect(button)
+                              } else if (currentStep === "block" && message.isChooseList) {
+                                handleBlockSelect()
+                              } else if (currentStep === "ward" && message.isChooseList) {
+                                handleWardSelect()
+                              } else if (currentStep === "booth" && message.isChooseList) {
+                                handleBoothSelect()
+                              } else if (currentStep === "continue") {
+                                handleContinueSelect(button)
+                              }
+                            }}
+                            className="text-sm px-4 py-2 border-2 border-[var(--whatsapp-green)] text-gray-800 bg-white font-medium hover:bg-[var(--whatsapp-green)] hover:text-white transition-all duration-200 rounded-full shadow-sm hover:shadow-md"
+                          >
+                            {button}
+                          </Button>
+                        ))}
+                      </div>
+                    )}
+                    <div className="text-xs text-[var(--whatsapp-timestamp)] text-right mt-2 flex items-center justify-end gap-1">
+                      {message.timestamp}
+                      {message.isUser && <span className="text-blue-500">✓✓</span>}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+          <div ref={messagesEndRef} />
+        </div>
       </div>
 
-      {(currentStep === "name" ||
-        currentStep === "phone" ||
-        currentStep === "experienceName" ||
-        currentStep === "experiencePhone" ||
-        currentStep === "experience") && (
+      {(currentStep === "phone" || currentStep === "experiencePhone" || currentStep === "experience") && (
         <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md p-4 bg-[var(--whatsapp-bg)] border-t border-gray-200">
           <div className="flex gap-3 items-center">
             <div className="flex-1 relative">
@@ -725,13 +635,11 @@ export default function WhatsAppChat() {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder={
-                  currentStep === "name" || currentStep === "experienceName"
-                    ? t("typeName")
-                    : currentStep === "phone" || currentStep === "experiencePhone"
-                      ? t("typePhone")
-                      : currentStep === "experience"
-                        ? t("typeExperience")
-                        : ""
+                  currentStep === "phone" || currentStep === "experiencePhone"
+                    ? t("typePhone")
+                    : currentStep === "experience"
+                      ? t("typeExperience")
+                      : ""
                 }
                 className="rounded-full border-none bg-white pr-12 shadow-sm focus:shadow-md transition-shadow"
                 onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
