@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ArrowLeft, Send, Eye, Search, X } from "lucide-react"
 import Image from "next/image"
+import { AmaderDetails } from "./amader-details"
 
 interface Message {
   id: string
@@ -136,6 +137,7 @@ export default function WhatsAppChat() {
   const [isOnline, setIsOnline] = useState(true)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const [searchTerm, setSearchTerm] = useState("")
+  const [showDetails, setShowDetails] = useState(false)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -147,14 +149,11 @@ export default function WhatsAppChat() {
 
   useEffect(() => {
     // Initial welcome message
-    const now = new Date();
-const timestamp = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-
     const welcomeMessage: Message = {
       id: "1",
       text: "",
       isUser: false,
-      timestamp: timestamp,
+      timestamp: "23:36",
       isWelcome: true,
       hasButtons: true,
       buttons: ["English", "বাংলা", "हिंदी"],
@@ -467,19 +466,15 @@ const timestamp = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit
 
     if (option === t("yes")) {
       setTimeout(() => {
-        const link = document.createElement("a")
-        link.href = "/amader-para-amader-samadhan-details.pdf"
-        link.download = "Amader Para Amader Samadhan Details.pdf"
-        link.click()
-
-        addMessage("PDF download started. Thank you for your interest!", false)
+        addMessage("Showing details. Expand categories to explore available works.", false)
+        setShowDetails(true)
         setCurrentStep("ended")
-      }, 1000)
+      }, 500)
     } else {
       setTimeout(() => {
         addMessage(t("thankYouForUsing"), false)
         setCurrentStep("ended")
-      }, 1000)
+      }, 500)
     }
   }
 
@@ -799,6 +794,28 @@ const timestamp = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit
               ) : (
                 <p className="text-center text-gray-500 py-4">{t("noResults")}</p>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showDetails && (
+        <div className="fixed inset-0 bg-black/60 flex items-end justify-center md:items-center backdrop-blur-sm z-50">
+          <div className="bg-white rounded-t-3xl md:rounded-3xl p-6 w-full max-w-md max-h-[85vh] flex flex-col shadow-2xl animate-in slide-in-from-bottom duration-300">
+            <div className="flex items-center justify-between mb-3">
+              {/* <h3 className="font-semibold text-lg text-gray-800">Amader Para Amader Samadhan</h3> */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setShowDetails(false)}
+                className="rounded-full hover:bg-gray-100"
+                aria-label="Close details"
+              >
+                <X className="w-5 h-5" />
+              </Button>
+            </div>
+            <div className="flex-1 overflow-y-auto pr-1">
+              <AmaderDetails />
             </div>
           </div>
         </div>
