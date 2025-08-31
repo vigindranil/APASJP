@@ -6,8 +6,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const blockId = searchParams.get("blockId")
     const wardId = searchParams.get("wardId")
-    const startDate = searchParams.get("startDate")
-    const endDate = searchParams.get("endDate")
+    const campDate = searchParams.get("campDate") // single date param
 
     const clauses: string[] = []
     const params: any[] = []
@@ -20,13 +19,9 @@ export async function GET(request: Request) {
       clauses.push("cd.ward_id = ?")
       params.push(Number.parseInt(wardId))
     }
-    if (startDate) {
-      clauses.push("cd.camp_date >= ?")
-      params.push(startDate)
-    }
-    if (endDate) {
-      clauses.push("cd.camp_date <= ?")
-      params.push(endDate)
+    if (campDate) {
+      clauses.push("cd.camp_date = ?")
+      params.push(campDate)
     }
 
     const where = clauses.length ? `WHERE ${clauses.join(" AND ")}` : ""
@@ -60,13 +55,15 @@ export async function GET(request: Request) {
       LEFT JOIN tbl_gp_ward_mstr w ON cd.ward_id = w.id
       LEFT JOIN tbl_block_ulb_mstr b ON cd.block_id = b.id
       ${where}
-      ORDER BY cd.camp_date DESC, cd.id DESC
+      ORDER BY cd.camp_date DESC, cd.id DESC
       `,
       params,
     )
-    
 
-    const countRows: any[] = await executeQuery(`SELECT COUNT(*) AS count FROM camp_details cd ${where}`, params)
+    const countRows: any[] = await executeQuery(
+      `SELECT COUNT(*) AS count FROM tbl_camp_schedule cd ${where}`,
+      params
+    )
     const count = Array.isArray(countRows) && countRows[0]?.count ? Number(countRows[0].count) : 0
 
     return NextResponse.json({ success: true, data: { count, rows } })

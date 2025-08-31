@@ -15,7 +15,6 @@ import { Separator } from "@/components/ui/separator"
 import { 
   BarChart3, 
   List, 
-  ChevronRight, 
   X, 
   Search, 
   Calendar,
@@ -23,7 +22,6 @@ import {
   Building2,
   Users,
   Filter,
-  RefreshCw,
   Check,
   ChevronsUpDown,
   Loader2
@@ -119,8 +117,7 @@ export default function CampsDashboard() {
   // filters
   const [blockId, setBlockId] = useState("")
   const [wardId, setWardId] = useState("")
-  const [startDate, setStartDate] = useState("")
-  const [endDate, setEndDate] = useState("")
+  const [campDate, setCampDate] = useState("")
 
   const { data: blocksResp } = useSWR("/api/blocks", fetcher)
   const blocks: { id: number; name: string }[] = blocksResp?.data ?? []
@@ -132,13 +129,12 @@ export default function CampsDashboard() {
   const [results, setResults] = useState<{ count: number; rows: CampRow[] } | null>(null)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
-  const hasActiveFilters = blockId || wardId || startDate || endDate
+  const hasActiveFilters = blockId || wardId || campDate
 
   const resetFilters = () => {
     setBlockId("")
     setWardId("")
-    setStartDate("")
-    setEndDate("")
+    setCampDate("")
     setResults(null)
     setErrorMsg(null)
   }
@@ -151,8 +147,7 @@ export default function CampsDashboard() {
       const params = new URLSearchParams()
       if (blockId) params.set("blockId", blockId)
       if (wardId) params.set("wardId", wardId)
-      if (startDate) params.set("startDate", startDate)
-      if (endDate) params.set("endDate", endDate)
+      if (campDate) params.set("campDate", campDate)
 
       const url = `/api/admin/camps/search${params.toString() ? `?${params.toString()}` : ""}`
       const resp = await fetch(url)
@@ -171,7 +166,7 @@ export default function CampsDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-      {/* Enhanced Header */}
+      {/* Header */}
       <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200/60 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
@@ -201,7 +196,7 @@ export default function CampsDashboard() {
       </header>
 
       <main className="max-w-7xl mx-auto px-6 py-8 space-y-8">
-        {/* Enhanced Stats Card */}
+        {/* Stats Card */}
         <Card className="border-0 shadow-lg bg-gradient-to-r from-white to-slate-50/50 backdrop-blur-sm">
           <CardHeader className="pb-3">
             <div className="flex items-center gap-2">
@@ -226,7 +221,7 @@ export default function CampsDashboard() {
           </CardContent>
         </Card>
 
-        {/* Enhanced Search Card */}
+        {/* Search Card */}
         <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
           <CardHeader className="pb-6">
             <div className="flex items-center gap-3">
@@ -235,7 +230,7 @@ export default function CampsDashboard() {
               </div>
               <div>
                 <CardTitle className="text-xl font-bold text-slate-900">Search & Filter Camps</CardTitle>
-                <p className="text-sm text-slate-600 mt-1">Use advanced filters to find specific camps</p>
+                <p className="text-sm text-slate-600 mt-1">Use filters to find specific camps</p>
               </div>
               {hasActiveFilters && (
                 <Badge variant="secondary" className="ml-auto bg-blue-50 text-blue-700 border border-blue-200">
@@ -288,44 +283,26 @@ export default function CampsDashboard() {
                 </div>
               </div>
 
-              {/* Date Filters */}
+              {/* Single Date Filter */}
               <div className="space-y-4 p-4 rounded-lg border border-slate-200 bg-slate-50/50">
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4 text-slate-600" />
-                  <h3 className="font-semibold text-slate-900">Date Range</h3>
+                  <h3 className="font-semibold text-slate-900">Camp Date</h3>
                 </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="startDate" className="text-sm font-medium text-slate-700">
-                      Start Date
-                    </Label>
-                    <div className="relative">
-                      <Input 
-                        id="startDate" 
-                        type="date" 
-                        value={startDate} 
-                        onChange={(e) => setStartDate(e.target.value)}
-                        className="pl-10 border-slate-300 focus:border-blue-500 focus:ring-blue-500"
-                      />
-                      <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
-                    </div>
-                  </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="endDate" className="text-sm font-medium text-slate-700">
-                      End Date
-                    </Label>
-                    <div className="relative">
-                      <Input 
-                        id="endDate" 
-                        type="date" 
-                        value={endDate} 
-                        onChange={(e) => setEndDate(e.target.value)}
-                        className="pl-10 border-slate-300 focus:border-blue-500 focus:ring-blue-500"
-                      />
-                      <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
-                    </div>
+                <div className="space-y-2">
+                  <Label htmlFor="campDate" className="text-sm font-medium text-slate-700">
+                    Select Date
+                  </Label>
+                  <div className="relative">
+                    <Input 
+                      id="campDate" 
+                      type="date" 
+                      value={campDate} 
+                      onChange={(e) => setCampDate(e.target.value)}
+                      className="pl-10 border-slate-300 focus:border-blue-500 focus:ring-blue-500"
+                    />
+                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
                   </div>
                 </div>
               </div>
@@ -382,7 +359,7 @@ export default function CampsDashboard() {
           </Card>
         )}
 
-        {/* Enhanced Results */}
+        {/* Results */}
         {results && (
           <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
             <CardHeader className="pb-6">
@@ -413,7 +390,6 @@ export default function CampsDashboard() {
                       <TableRow className="bg-slate-50 border-slate-200">
                         <TableHead className="font-semibold text-slate-700">Date</TableHead>
                         <TableHead className="font-semibold text-slate-700">Venue</TableHead>
-                        <TableHead className="font-semibold text-slate-700">Habitation</TableHead>
                         <TableHead className="font-semibold text-slate-700">Block</TableHead>
                         <TableHead className="font-semibold text-slate-700">Ward</TableHead>
                         <TableHead className="font-semibold text-slate-700">Assembly Constituency</TableHead>
@@ -436,7 +412,6 @@ export default function CampsDashboard() {
                             })}
                           </TableCell>
                           <TableCell>{row.venue || <span className="text-slate-400">—</span>}</TableCell>
-                          <TableCell>{row.habitation || <span className="text-slate-400">—</span>}</TableCell>
                           <TableCell>{row.block_name || <span className="text-slate-400">—</span>}</TableCell>
                           <TableCell>{row.ward_name || <span className="text-slate-400">—</span>}</TableCell>
                           <TableCell>{row.ac || <span className="text-slate-400">—</span>}</TableCell>

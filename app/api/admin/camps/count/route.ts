@@ -3,7 +3,7 @@ import { executeQuery } from "@/lib/database"
 
 export async function GET() {
   try {
-    const rows = await executeQuery("SELECT COUNT(*) AS count FROM camp_details")
+    const rows = await executeQuery("SELECT COUNT(*) AS count FROM tbl_camp_schedule")
     const count = Array.isArray(rows) && rows[0]?.count ? Number(rows[0].count) : 0
     return NextResponse.json({ success: true, data: { count } })
   } catch (error) {
