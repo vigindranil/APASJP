@@ -149,11 +149,16 @@ export default function WhatsAppChat() {
 
   useEffect(() => {
     // Initial welcome message
+    const now = new Date()
+    const hours = now.getHours().toString().padStart(2, "0")
+    const minutes = now.getMinutes().toString().padStart(2, "0")
+    const currentTime = `${hours}:${minutes}`
+
     const welcomeMessage: Message = {
       id: "1",
       text: "",
       isUser: false,
-      timestamp: "23:36",
+      timestamp: currentTime, // current time here
       isWelcome: true,
       hasButtons: true,
       buttons: ["English", "বাংলা", "हिंदी"],
