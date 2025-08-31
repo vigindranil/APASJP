@@ -1,9 +1,11 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { ArrowLeft, Send, Eye, Search, X } from "lucide-react"
+import { ArrowLeft, Send, Eye, Search, X, CheckCircle2, XCircle, Smile, Meh, Frown } from "lucide-react"
 import Image from "next/image"
 import { AmaderDetails } from "./amader-details"
 
@@ -48,19 +50,30 @@ const translations = {
     selectBlock: "Please select your Block / Municipality",
     selectWard: "Please select your GP / Ward",
     selectBooth: "Please select your Electoral Booth",
-    sharePhone: "Share your Mobile Number",
+    sharePhone: "To receive further updates, please share your mobile number.",
     chooseList: "Choose list",
     searchBlocks: "Search blocks...",
     searchWards: "Search wards...",
     searchBooths: "Search booths...",
     noResults: "No results found",
-    typePhone: "Type your phone number...",
+    typePhone: "To receive further updates, please share your mobile number.",
     typeExperience: "Type your experience...",
-    thankYou: "Thank you for sharing your experience with us!",
+    thankYou: "Thank you for sharing your experience with us! Kindly attend the camp on the scheduled date",
     moreDetailsQuestion: 'Know more details about "Amader Para Amader Samadhan"?',
     yes: "Yes",
     no: "No",
-    thankYouForUsing: "Thank you for using our service!",
+    thankYouForUsing: "Thank you for using our service! Kindly attend the camp on the scheduled date",
+    qRecordedPriorities: "Were you able to document the most important works/projects in your booth area by priority?",
+    qOverallExperience: "How was your overall experience at the Amader Para Amader Samadhan camp?",
+    qInformedProjects: "Were you broadly informed about all projects at this camp?",
+    qBoothFacility: "How was the availability and use of booth-level facilities?",
+    ratingExcellent: "Excellent",
+    ratingGood: "Good",
+    ratingAverage: "Average",
+    ratingPoor: "Poor",
+    submit: "Submit",
+    surveyTitle: "Share your experience",
+    surveySubtitle: "Please answer the following questions",
   },
   বাংলা: {
     welcome: "নমস্কার",
@@ -71,19 +84,30 @@ const translations = {
     selectBlock: "অনুগ্রহ করে আপনার ব্লক / পৌরসভা নির্বাচন করুন",
     selectWard: "অনুগ্রহ করে আপনার জিপি / ওয়ার্ড নির্বাচন করুন",
     selectBooth: "অনুগ্রহ করে আপনার নির্বাচনী বুথ নির্বাচন করুন",
-    sharePhone: "আপনার মোবাইল নম্বর শেয়ার করুন",
+    sharePhone: "পরবর্তী আপডেট পেতে, দয়া করে আপনার মোবাইল নম্বর শেয়ার করুন।",
     chooseList: "তালিকা বেছে নিন",
     searchBlocks: "ব্লক খুঁজুন...",
     searchWards: "ওয়ার্ড খুঁজুন...",
     searchBooths: "বুথ খুঁজুন...",
     noResults: "কোন ফলাফল পাওয়া যায়নি",
-    typePhone: "আপনার ফোন নম্বর লিখুন...",
+    typePhone: "পরবর্তী আপডেট পেতে, দয়া করে আপনার মোবাইল নম্বর শেয়ার করুন।",
     typeExperience: "আপনার অভিজ্ঞতা লিখুন...",
-    thankYou: "আপনার অভিজ্ঞতা আমাদের সাথে শেয়ার করার জন্য ধন্যবাদ!",
+    thankYou: "আপনার অভিজ্ঞতা আমাদের সাথে শেয়ার করার জন্য ধন্যবাদ! অনুগ্রহ করে নির্ধারিত তারিখে ক্যাম্পে উপস্থিত থাকুন।",
     moreDetailsQuestion: '"আমাদের পাড়া আমাদের সমাধান" সম্পর্কে আরও বিস্তারিত জানতে চান?',
     yes: "হ্যাঁ",
     no: "না",
-    thankYouForUsing: "আমাদের সেবা ব্যবহার করার জন্য ধন্যবাদ!",
+    thankYouForUsing: "আমাদের সেবা ব্যবহার করার জন্য ধন্যবাদ! অনুগ্রহ করে নির্ধারিত তারিখে ক্যাম্পে উপস্থিত থাকুন।",
+    qRecordedPriorities: "আপনি আপনার বুথ এলাকার সবচেয়ে গুরুত্বপূর্ণ কাজ / প্রকল্প অগ্রাধিকারের ভিত্তিতে নথিভুক্ত করতে পেরেছেন কী না?",
+    qOverallExperience: "আমাদের পাড়া আমাদের সমাধান ক্যাম্পে এসে আপনার সামগ্রিক অভিজ্ঞতা কেমন হলো?",
+    qInformedProjects: "এই ক্যাম্পে সমস্ত প্রকল্প সম্পর্কে আপনাকে বিস্তৃত রূপে জানানো হয়েছে কী না?",
+    qBoothFacility: "বুথ লেভেল ফেসিলিটির সহজলভ্যতা এবং ব্যবহার কেমন ছিল?",
+    ratingExcellent: "দারুণ",
+    ratingGood: "ভালো",
+    ratingAverage: "মোটামুটি",
+    ratingPoor: "খারাপ",
+    submit: "জমা দিন",
+    surveyTitle: "আপনার অভিজ্ঞতা শেয়ার করুন",
+    surveySubtitle: "অনুগ্রহ করে নিচের প্রশ্নগুলির উত্তর দিন",
   },
   हिंदी: {
     welcome: "नमस्कार",
@@ -94,27 +118,66 @@ const translations = {
     selectBlock: "कृपया अपना ब्लॉक / नगरपालिका चुनें",
     selectWard: "कृपया अपना जीपी / वार्ड चुनें",
     selectBooth: "कृपया अपना चुनावी बूथ चुनें",
-    sharePhone: "अपना मोबाइल नंबर साझा करें",
+    sharePhone: "आगे की अपडेट प्राप्त करने के लिए, कृपया अपना मोबाइल नंबर साझा करें।",
     chooseList: "सूची चुनें",
     searchBlocks: "ब्लॉक खोजें...",
     searchWards: "वार्ड खोजें...",
     searchBooths: "बूथ खोजें...",
     noResults: "कोई परिणाम नहीं मिला",
-    typePhone: "अपना फोन नंबर टाइप करें...",
+    typePhone: "आगे की अपडेट प्राप्त करने के लिए, कृपया अपना मोबाइल नंबर साझा करें।",
     typeExperience: "अपना अनुभव टाइप करें...",
-    thankYou: "अपना अनुभव हमारे साथ साझा करने के लिए धन्यवाद!",
+    thankYou: "अपना अनुभव हमारे साथ साझा करने के लिए धन्यवाद! कृपया निर्धारित तिथि पर शिविर में उपस्थित हों।",
     moreDetailsQuestion: '"हमारा पाड़ा हमारा समाधान" के बारे में और जानना चाहते हैं?',
     yes: "हाँ",
     no: "नहीं",
-    thankYouForUsing: "हमारी सेवा का उपयोग करने के लिए धन्यवाद!",
+    thankYouForUsing: "हमारी सेवा का उपयोग करने के लिए धन्यवाद! कृपया निर्धारित तिथि पर शिविर में उपस्थित हों।",
+    qRecordedPriorities: "क्या आप अपने बूथ क्षेत्र के सबसे महत्वपूर्ण कार्य/परियोजनाओं को प्राथमिकता के आधार पर दर्ज कर पाए?",
+    qOverallExperience: "‘हमारा पाड़ा हमारा समाधान’ कैंप में आपका समग्र अनुभव कैसा रहा?",
+    qInformedProjects: "क्या इस कैंप में आपको सभी परियोजनाओं के बारे में विस्तृत रूप से बताया गया?",
+    qBoothFacility: "बूथ-स्तर की सुविधाओं की उपलब्धता और उपयोग कैसा था?",
+    ratingExcellent: "उत्कृष्ट",
+    ratingGood: "अच्छा",
+    ratingAverage: "औसत",
+    ratingPoor: "खराब",
+    submit: "सबमिट करें",
+    surveyTitle: "अपना अनुभव साझा करें",
+    surveySubtitle: "कृपया निम्न प्रश्नों के उत्तर दें",
   },
+ }
+ 
+
+let userData: UserData | null = null
+
+function t<K extends keyof (typeof translations)["English"]>(key: K): string {
+  // normalize arbitrary language inputs to our translation keys
+  const raw = (typeof userData?.language === "string" ? userData?.language : "") || "English"
+
+  // map common variants to our keys
+  const normalized =
+    raw.trim() === "English" || raw.trim().toLowerCase().startsWith("en")
+      ? "English"
+      : raw.trim() === "বাংলা" || raw.trim().toLowerCase() === "bangla" || raw.trim().toLowerCase().startsWith("bn")
+        ? "বাংলা"
+        : raw.trim() === "हिंदी" || raw.trim().toLowerCase() === "hindi" || raw.trim().toLowerCase().startsWith("hi")
+          ? "हिंदी"
+          : "English"
+
+  const enPack = translations["English"]
+  const langPack = (translations as any)?.[normalized] as (typeof translations)["English"] | undefined
+
+  // primary from normalized lang, fallback to English, final fallback to key string
+  const fromLang = langPack?.[key]
+  const fromEn = enPack?.[key]
+
+  // If both are falsy (shouldn't happen), return the key name
+  return (fromLang ?? fromEn ?? String(key)) as string
 }
 
 export default function WhatsAppChat() {
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState("")
   const [currentStep, setCurrentStep] = useState("welcome")
-  const [userData, setUserData] = useState<UserData>({
+  const [userDataState, setUserDataState] = useState<UserData>({
     language: "",
     blockId: 0,
     blockName: "",
@@ -138,6 +201,15 @@ export default function WhatsAppChat() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const [searchTerm, setSearchTerm] = useState("")
   const [showDetails, setShowDetails] = useState(false)
+  const [showSurvey, setShowSurvey] = useState(false)
+  const [survey, setSurvey] = useState<{
+    recorded_priorities?: "yes" | "no"
+    overall_experience?: "excellent" | "good" | "average" | "poor"
+    informed_projects?: "yes" | "no"
+    booth_facility?: "excellent" | "good" | "average" | "poor"
+  }>({})
+
+  userData = userDataState
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -264,17 +336,21 @@ export default function WhatsAppChat() {
   const saveExperience = async (experienceData: {
     name: string
     phone: string
-    experience: string
+    experience?: string
     language: string
+    answers?: {
+      recorded_priorities?: "yes" | "no"
+      overall_experience?: "excellent" | "good" | "average" | "poor"
+      informed_projects?: "yes" | "no"
+      booth_facility?: "excellent" | "good" | "average" | "poor"
+    }
   }) => {
     try {
       setLoading(true)
       console.log("[v0] Saving experience data:", experienceData)
       const response = await fetch("/api/save-experience", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(experienceData),
       })
       const data = await response.json()
@@ -291,9 +367,25 @@ export default function WhatsAppChat() {
     }
   }
 
-  const t = (key: keyof typeof translations.English) => {
-    const lang = userData.language as keyof typeof translations
-    return translations[lang]?.[key] || translations.English[key]
+  const fetchCampDetails = async (wardId: number, boothId: number, language: string) => {
+    try {
+      setLoading(true)
+      const response = await fetch("/api/camp-details", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ wardId, boothId, language }),
+      })
+      const data = await response.json()
+      if (data.success) {
+        return data.campInfo.message as string
+      }
+      throw new Error(data.error || "Failed to fetch camp details")
+    } catch (error) {
+      console.error("Error fetching camp details:", error)
+      return "Sorry, there was an error fetching camp details. Please try again."
+    } finally {
+      setLoading(false)
+    }
   }
 
   const getLocalizedName = (item: LocationItem) => {
@@ -327,11 +419,11 @@ export default function WhatsAppChat() {
   }
 
   const handleLanguageSelect = (language: string) => {
-    setUserData((prev) => ({ ...prev, language }))
+    setUserDataState((prev) => ({ ...prev, language }))
     addMessage(language, true)
 
     setTimeout(() => {
-      const updatedUserData = { ...userData, language }
+      const updatedUserData = { ...userDataState, language }
       const t_temp = (key: keyof typeof translations.English) => {
         const lang = updatedUserData.language as keyof typeof translations
         return translations[lang]?.[key] || translations.English[key]
@@ -358,7 +450,7 @@ export default function WhatsAppChat() {
       // Fallback: default to experience path if an unrecognized option arrives
       setTimeout(() => {
         addMessage(t("sharePhone"), false)
-        setCurrentStep("experiencePhone")
+        setCurrentStep("phone")
       }, 1000)
     }
   }
@@ -369,7 +461,7 @@ export default function WhatsAppChat() {
   }
 
   const selectBlock = (block: LocationItem) => {
-    setUserData((prev) => ({ ...prev, blockId: block.id, blockName: block.name }))
+    setUserDataState((prev) => ({ ...prev, blockId: block.id, blockName: block.name }))
     addMessage(getLocalizedName(block), true)
     setShowBlockList(false)
     setSearchTerm("")
@@ -388,7 +480,7 @@ export default function WhatsAppChat() {
   }
 
   const selectWard = (ward: LocationItem) => {
-    setUserData((prev) => ({ ...prev, wardId: ward.id, wardName: ward.name }))
+    setUserDataState((prev) => ({ ...prev, wardId: ward.id, wardName: ward.name }))
     addMessage(getLocalizedName(ward), true)
     setShowWardList(false)
     setSearchTerm("")
@@ -407,49 +499,74 @@ export default function WhatsAppChat() {
   }
 
   const selectBooth = (booth: LocationItem) => {
-    setUserData((prev) => ({ ...prev, boothId: booth.id, boothName: booth.name }))
+    setUserDataState((prev) => ({ ...prev, boothId: booth.id, boothName: booth.name }))
     addMessage(getLocalizedName(booth), true)
     setShowBoothList(false)
     setSearchTerm("")
 
-    setTimeout(() => {
-      addMessage(t("sharePhone"), false)
-      setCurrentStep("phone")
-    }, 1000)
+    // Fetch and display camp details before asking for phone
+    ;(async () => {
+      const wardId = userDataState.wardId // ward already selected earlier
+      const boothId = booth.id
+      const lang = userDataState.language
+      const campMessage = await fetchCampDetails(wardId, boothId, lang)
+      addMessage(campMessage, false)
+
+      setTimeout(() => {
+        // You can change this copy if you want a longer string:
+        // e.g. "For more information, please share your mobile number"
+        addMessage(t("sharePhone"), false)
+        setCurrentStep("phone")
+      }, 1000)
+    })()
   }
 
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return
 
     if (currentStep === "phone") {
-      const updatedUserData = { ...userData, name: "", phone: inputValue }
-      setUserData(updatedUserData)
+      const updatedUserData = { ...userDataState, name: "", phone: inputValue }
+      setUserDataState(updatedUserData)
       addMessage(inputValue, true)
       setInputValue("")
 
-      const campMessage = await saveUserDataWithData(updatedUserData)
-      setTimeout(() => {
-        addMessage(campMessage, false)
+      // Save only; do not display camp details again
+      try {
+        setLoading(true)
+        const response = await fetch("/api/save-user-data", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedUserData),
+        })
+        const data = await response.json()
+        if (!data.success) throw new Error(data.error)
+
+        // Proceed with the rest of the flow as before
         setTimeout(() => {
           addMessage(t("moreDetailsQuestion"), false, true, [t("yes"), t("no")])
           setCurrentStep("continue")
-        }, 2000)
-      }, 1000)
+        }, 1000)
+      } catch (err) {
+        console.error("Error saving user data:", err)
+        addMessage("Sorry, there was an error processing your request. Please try again.", false)
+      } finally {
+        setLoading(false)
+      }
     } else if (currentStep === "experiencePhone") {
-      setUserData((prev) => ({ ...prev, name: "", phone: inputValue }))
+      setUserDataState((prev) => ({ ...prev, name: "", phone: inputValue }))
       addMessage(inputValue, true)
       setInputValue("")
 
       setTimeout(() => {
-        addMessage(t("typeExperience"), false)
-        setCurrentStep("experience")
-      }, 1000)
+        setShowSurvey(true)
+        setCurrentStep("survey")
+      }, 400)
     } else if (currentStep === "experience") {
       const experienceData = {
         name: "",
-        phone: userData.phone,
+        phone: userDataState.phone,
         experience: inputValue,
-        language: userData.language,
+        language: userDataState.language,
       }
 
       addMessage(inputValue, true)
@@ -461,8 +578,8 @@ export default function WhatsAppChat() {
         setTimeout(() => {
           addMessage(t("moreDetailsQuestion"), false, true, [t("yes"), t("no")])
           setCurrentStep("continue")
-        }, 2000)
-      }, 1000)
+        }, 1200)
+      }, 600)
     }
   }
 
@@ -481,6 +598,28 @@ export default function WhatsAppChat() {
         setCurrentStep("ended")
       }, 500)
     }
+  }
+
+  const allSurveyAnswered =
+    survey.recorded_priorities && survey.overall_experience && survey.informed_projects && survey.booth_facility
+
+  const submitSurvey = async () => {
+    if (!allSurveyAnswered) return
+    const payload = {
+      name: "",
+      phone: userDataState.phone,
+      language: userDataState.language,
+      answers: survey,
+    }
+    const responseMessage = await saveExperience(payload)
+    setShowSurvey(false)
+    setTimeout(() => {
+      addMessage(responseMessage, false)
+      setTimeout(() => {
+        addMessage(t("moreDetailsQuestion"), false, true, [t("yes"), t("no")])
+        setCurrentStep("continue")
+      }, 1200)
+    }, 600)
   }
 
   const getFilteredList = (list: LocationItem[]) => {
@@ -758,7 +897,7 @@ export default function WhatsAppChat() {
 
       {showBoothList && (
         <div className="fixed inset-0 bg-black/60 flex items-end justify-center backdrop-blur-sm z-50">
-          <div className="bg-white rounded-t-3xl p-6 w-full max-w-md max-h-[80vh] flex flex-col shadow-2xl animate-in slide-in-from-bottom duration-300">
+          <div className="bg-white rounded-t-3xl p-6 w-full max-w-md max-h-[85vh] flex flex-col shadow-2xl animate-in slide-in-from-bottom duration-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-semibold text-lg text-gray-800">{t("selectBooth")}</h3>
               <Button
@@ -808,7 +947,6 @@ export default function WhatsAppChat() {
         <div className="fixed inset-0 bg-black/60 flex items-end justify-center md:items-center backdrop-blur-sm z-50">
           <div className="bg-white rounded-t-3xl md:rounded-3xl p-6 w-full max-w-md max-h-[85vh] flex flex-col shadow-2xl animate-in slide-in-from-bottom duration-300">
             <div className="flex items-center justify-between mb-3">
-              {/* <h3 className="font-semibold text-lg text-gray-800">Amader Para Amader Samadhan</h3> */}
               <Button
                 variant="ghost"
                 size="icon"
@@ -825,6 +963,180 @@ export default function WhatsAppChat() {
           </div>
         </div>
       )}
+
+      {showSurvey && (
+        <div className="fixed inset-0 bg-black/60 flex items-end justify-center md:items-center backdrop-blur-sm z-50">
+          <div className="bg-white rounded-t-3xl md:rounded-3xl p-6 w-full max-w-md max-h-[88vh] flex flex-col shadow-2xl animate-in slide-in-from-bottom duration-300">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold text-gray-900 text-pretty text-balance">{t("surveyTitle")}</h3>
+                <p className="text-sm text-gray-600 mt-1">{t("surveySubtitle")}</p>
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setShowSurvey(false)}
+                className="rounded-full hover:bg-gray-100"
+                aria-label="Close survey"
+              >
+                <X className="w-5 h-5" />
+              </Button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto space-y-6 pr-1">
+              {/* Q1 Yes/No */}
+              <div>
+                <p className="font-semibold text-gray-800 mb-3 text-pretty">
+                  {t("qRecordedPriorities") || translations["English"].qRecordedPriorities}
+                </p>
+                <div className="flex flex-col gap-3">
+                  <SurveyPill
+                    active={survey.recorded_priorities === "yes"}
+                    onClick={() => setSurvey((s) => ({ ...s, recorded_priorities: "yes" }))}
+                    icon={<CheckCircle2 className="w-6 h-6 text-green-600" />}
+                    label={t("yes")}
+                  />
+                  <SurveyPill
+                    active={survey.recorded_priorities === "no"}
+                    onClick={() => setSurvey((s) => ({ ...s, recorded_priorities: "no" }))}
+                    icon={<XCircle className="w-6 h-6 text-red-500" />}
+                    label={t("no")}
+                  />
+                </div>
+              </div>
+
+              {/* Q2 4-point */}
+              <div>
+                <p className="font-semibold text-gray-800 mb-3 text-pretty">
+                  {t("qOverallExperience") || translations["English"].qOverallExperience}
+                </p>
+                <div className="flex flex-col gap-3">
+                  <SurveyPill
+                    active={survey.overall_experience === "excellent"}
+                    onClick={() => setSurvey((s) => ({ ...s, overall_experience: "excellent" }))}
+                    icon={<Smile className="w-6 h-6 text-amber-500" />}
+                    label={t("ratingExcellent")}
+                  />
+                  <SurveyPill
+                    active={survey.overall_experience === "good"}
+                    onClick={() => setSurvey((s) => ({ ...s, overall_experience: "good" }))}
+                    icon={<Smile className="w-6 h-6 text-yellow-500" />}
+                    label={t("ratingGood")}
+                  />
+                  <SurveyPill
+                    active={survey.overall_experience === "average"}
+                    onClick={() => setSurvey((s) => ({ ...s, overall_experience: "average" }))}
+                    icon={<Meh className="w-6 h-6 text-gray-500" />}
+                    label={t("ratingAverage")}
+                  />
+                  <SurveyPill
+                    active={survey.overall_experience === "poor"}
+                    onClick={() => setSurvey((s) => ({ ...s, overall_experience: "poor" }))}
+                    icon={<Frown className="w-6 h-6 text-blue-500" />}
+                    label={t("ratingPoor")}
+                  />
+                </div>
+              </div>
+
+              {/* Q3 Yes/No */}
+              <div>
+                <p className="font-semibold text-gray-800 mb-3 text-pretty">
+                  {t("qInformedProjects") || translations["English"].qInformedProjects}
+                </p>
+                <div className="flex flex-col gap-3">
+                  <SurveyPill
+                    active={survey.informed_projects === "yes"}
+                    onClick={() => setSurvey((s) => ({ ...s, informed_projects: "yes" }))}
+                    icon={<CheckCircle2 className="w-6 h-6 text-green-600" />}
+                    label={t("yes")}
+                  />
+                  <SurveyPill
+                    active={survey.informed_projects === "no"}
+                    onClick={() => setSurvey((s) => ({ ...s, informed_projects: "no" }))}
+                    icon={<XCircle className="w-6 h-6 text-red-500" />}
+                    label={t("no")}
+                  />
+                </div>
+              </div>
+
+              {/* Q4 4-point */}
+              <div>
+                <p className="font-semibold text-gray-800 mb-3 text-pretty">
+                  {t("qBoothFacility") || translations["English"].qBoothFacility}
+                </p>
+                <div className="flex flex-col gap-3">
+                  <SurveyPill
+                    active={survey.booth_facility === "excellent"}
+                    onClick={() => setSurvey((s) => ({ ...s, booth_facility: "excellent" }))}
+                    icon={<Smile className="w-6 h-6 text-amber-500" />}
+                    label={t("ratingExcellent")}
+                  />
+                  <SurveyPill
+                    active={survey.booth_facility === "good"}
+                    onClick={() => setSurvey((s) => ({ ...s, booth_facility: "good" }))}
+                    icon={<Smile className="w-6 h-6 text-yellow-500" />}
+                    label={t("ratingGood")}
+                  />
+                  <SurveyPill
+                    active={survey.booth_facility === "average"}
+                    onClick={() => setSurvey((s) => ({ ...s, booth_facility: "average" }))}
+                    icon={<Meh className="w-6 h-6 text-gray-500" />}
+                    label={t("ratingAverage")}
+                  />
+                  <SurveyPill
+                    active={survey.booth_facility === "poor"}
+                    onClick={() => setSurvey((s) => ({ ...s, booth_facility: "poor" }))}
+                    icon={<Frown className="w-6 h-6 text-blue-500" />}
+                    label={t("ratingPoor")}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-4">
+              <Button
+                onClick={submitSurvey}
+                disabled={!allSurveyAnswered || loading}
+                className="w-full rounded-full bg-[var(--whatsapp-green)] hover:bg-[var(--whatsapp-green)]/90"
+              >
+                {t("submit")}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
+  )
+}
+
+function SurveyPill({
+  active,
+  onClick,
+  icon,
+  label,
+}: {
+  active: boolean
+  onClick: () => void
+  icon: React.ReactNode
+  label: string
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`w-full flex items-center gap-3 rounded-2xl p-4 transition-colors border relative
+        focus:outline-none focus:ring-2 focus:ring-blue-200
+        ${active ? "bg-blue-50 border-blue-400" : "bg-white border-gray-200 hover:bg-gray-50"}`}
+      aria-pressed={active}
+    >
+      <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center shrink-0">{icon}</div>
+      <div className="flex-1 text-left font-medium text-gray-800">{label}</div>
+      <div
+        className={`w-5 h-5 rounded-full border-2 flex items-center justify-center
+          ${active ? "border-blue-600" : "border-gray-300"}`}
+      >
+        {active && <div className="w-3 h-3 bg-blue-600 rounded-full" />}
+      </div>
+    </button>
   )
 }

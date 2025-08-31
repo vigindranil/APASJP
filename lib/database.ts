@@ -1,15 +1,5 @@
 import mysql from "mysql2/promise"
-
-// const dbConfig = {
-//   host: "public-primary-mysql-inmumbaizone2-189276-1646600.db.onutho.com",
-//   port: 3306,
-//   user: "dbadmin",
-//   password: "g@E3J@6g57@fEbX@",
-//   database: "db_apas",
-//   ssl: {
-//     rejectUnauthorized: false,
-//   },
-// }
+import type { ResultSetHeader } from "mysql2"
 
 const dbConfig = {
   host: "150.241.245.34",
@@ -22,24 +12,45 @@ const dbConfig = {
   },
 }
 
-let connection: mysql.Connection | null = null
+let pool: mysql.Pool | null = null
 
-export async function getConnection() {
-  if (!connection) {
-    connection = await mysql.createConnection(dbConfig)
+function getPool() {
+  if (!pool) {
+    pool = mysql.createPool({
+      ...dbConfig,
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0,
+    })
   }
-  return connection
+  return pool
 }
 
-export async function executeQuery(query: string, params: any[] = []) {
-  try {
-    const conn = await getConnection()
-    const [rows] = await conn.execute(query, params)
-    return rows
-  } catch (error) {
-    console.error("Database query error:", error)
-    throw error
-  }
+/**
+ * Executes a parameterized SQL query and returns the result rows.
+ * Usage: executeQuery("SELECT * FROM table WHERE id = ?", [id])
+ */
+export async function executeQuery<T = any>(
+  query: string,
+  params: any[] = [],
+): Promise<T[]> {
+  const p = getPool()
+  const [rows] = await p.execute(query, params)
+  return rows as T[]
 }
 
-export const sql = executeQuery
+/**
+ * Executes a write operation (INSERT/UPDATE/DELETE) and returns ResultSetHeader.
+ * Usage: executeWrite("INSERT INTO table (col) VALUES (?)", [value])
+ */
+export async function executeWrite(
+  query: string,
+  params: any[] = [],
+): Promise<ResultSetHeader> {
+  const p = getPool()
+  const [result] = await p.execute<ResultSetHeader>(query, params)
+  return result
+}
+
+export const db = { executeQuery, executeWrite }
+export default executeQuery
