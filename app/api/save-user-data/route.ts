@@ -77,7 +77,7 @@ export async function POST(request: Request) {
       INNER JOIN tbl_electoral_booth_mstr eb 
         ON eb.ebm_booth_code = T.value 
         AND eb.ebm_gp_ward_id = cd.cs_gp_ward_id
-      WHERE cd.cs_gp_ward_id = ? AND eb.ebm_booth_code = ?
+      WHERE cd.cs_gp_ward_id = ? AND eb.ebm_id = ?
       `,
       [userData.wardId, userData.boothId], // 👈 passing ward_id and boothCode
     )

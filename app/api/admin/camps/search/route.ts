@@ -33,7 +33,7 @@ export async function GET(request: Request) {
 
     const rows: any[] = await executeQuery(
       `
-       SELECT 
+      SELECT 
           cd.id,
           cd.block_id,
           b.name AS block_name,
@@ -56,11 +56,11 @@ export async function GET(request: Request) {
           cd.ac_np,
           cd.created_at,
           cd.updated_at
-      FROM camp_details cd
-      LEFT JOIN wards w ON cd.ward_id = w.id
-      LEFT JOIN blocks b ON cd.block_id = b.id
+      FROM tbl_camp_schedule cd
+      LEFT JOIN tbl_gp_ward_mstr w ON cd.ward_id = w.id
+      LEFT JOIN tbl_block_ulb_mstr b ON cd.block_id = b.id
       ${where}
-      ORDER BY cd.camp_date DESC, cd.id DESC
+      ORDER BY cd.camp_date DESC, cd.id DESC
       `,
       params,
     )
