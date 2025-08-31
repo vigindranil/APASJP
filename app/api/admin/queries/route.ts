@@ -17,10 +17,10 @@ export async function GET() {
         cd.habitation,
         cd.ac
       FROM user_data ud
-      LEFT JOIN blocks b ON ud.block_id = b.id
-      LEFT JOIN wards w ON ud.ward_id = w.id
-      LEFT JOIN electoral_booths eb ON ud.booth_id = eb.id
-      LEFT JOIN camp_details cd ON cd.electoral_booth_id = eb.id
+      LEFT JOIN tbl_block_ulb_mstr b ON ud.block_id = b.id
+      LEFT JOIN tbl_gp_ward_mstr w ON ud.ward_id = w.id
+      LEFT JOIN tbl_electoral_booth_mstr eb ON ud.booth_id = eb.id
+      LEFT JOIN tbl_camp_schedule cd ON cd.electoral_booth_id = eb.id
       ORDER BY ud.created_at DESC
     `
 
