@@ -50,19 +50,19 @@ const translations = {
     selectBlock: "Please select your Block / Municipality",
     selectWard: "Please select your GP / Ward",
     selectBooth: "Please select your Electoral Booth",
-    sharePhone: "To receive further updates, please share your mobile number.",
+    sharePhone: "Share your Mobile Number",
     chooseList: "Choose list",
     searchBlocks: "Search blocks...",
     searchWards: "Search wards...",
     searchBooths: "Search booths...",
     noResults: "No results found",
-    typePhone: "To receive further updates, please share your mobile number.",
+    typePhone: "Type your phone number...",
     typeExperience: "Type your experience...",
-    thankYou: "Thank you for sharing your experience with us! Kindly attend the camp on the scheduled date",
+    thankYou: "Thank you for sharing your experience with us!",
     moreDetailsQuestion: 'Know more details about "Amader Para Amader Samadhan"?',
     yes: "Yes",
     no: "No",
-    thankYouForUsing: "Thank you for using our service! Kindly attend the camp on the scheduled date",
+    thankYouForUsing: "Thank you for using our service!",
     qRecordedPriorities: "Were you able to document the most important works/projects in your booth area by priority?",
     qOverallExperience: "How was your overall experience at the Amader Para Amader Samadhan camp?",
     qInformedProjects: "Were you broadly informed about all projects at this camp?",
@@ -84,19 +84,19 @@ const translations = {
     selectBlock: "অনুগ্রহ করে আপনার ব্লক / পৌরসভা নির্বাচন করুন",
     selectWard: "অনুগ্রহ করে আপনার জিপি / ওয়ার্ড নির্বাচন করুন",
     selectBooth: "অনুগ্রহ করে আপনার নির্বাচনী বুথ নির্বাচন করুন",
-    sharePhone: "পরবর্তী আপডেট পেতে, দয়া করে আপনার মোবাইল নম্বর শেয়ার করুন।",
+    sharePhone: "আপনার মোবাইল নম্বর শেয়ার করুন",
     chooseList: "তালিকা বেছে নিন",
     searchBlocks: "ব্লক খুঁজুন...",
     searchWards: "ওয়ার্ড খুঁজুন...",
     searchBooths: "বুথ খুঁজুন...",
     noResults: "কোন ফলাফল পাওয়া যায়নি",
-    typePhone: "পরবর্তী আপডেট পেতে, দয়া করে আপনার মোবাইল নম্বর শেয়ার করুন।",
+    typePhone: "আপনার ফোন নম্বর লিখুন...",
     typeExperience: "আপনার অভিজ্ঞতা লিখুন...",
-    thankYou: "আপনার অভিজ্ঞতা আমাদের সাথে শেয়ার করার জন্য ধন্যবাদ! অনুগ্রহ করে নির্ধারিত তারিখে ক্যাম্পে উপস্থিত থাকুন।",
+    thankYou: "আপনার অভিজ্ঞতা আমাদের সাথে শেয়ার করার জন্য ধন্যবাদ!",
     moreDetailsQuestion: '"আমাদের পাড়া আমাদের সমাধান" সম্পর্কে আরও বিস্তারিত জানতে চান?',
     yes: "হ্যাঁ",
     no: "না",
-    thankYouForUsing: "আমাদের সেবা ব্যবহার করার জন্য ধন্যবাদ! অনুগ্রহ করে নির্ধারিত তারিখে ক্যাম্পে উপস্থিত থাকুন।",
+    thankYouForUsing: "আমাদের সেবা ব্যবহার করার জন্য ধন্যবাদ!",
     qRecordedPriorities: "আপনি আপনার বুথ এলাকার সবচেয়ে গুরুত্বপূর্ণ কাজ / প্রকল্প অগ্রাধিকারের ভিত্তিতে নথিভুক্ত করতে পেরেছেন কী না?",
     qOverallExperience: "আমাদের পাড়া আমাদের সমাধান ক্যাম্পে এসে আপনার সামগ্রিক অভিজ্ঞতা কেমন হলো?",
     qInformedProjects: "এই ক্যাম্পে সমস্ত প্রকল্প সম্পর্কে আপনাকে বিস্তৃত রূপে জানানো হয়েছে কী না?",
@@ -118,19 +118,19 @@ const translations = {
     selectBlock: "कृपया अपना ब्लॉक / नगरपालिका चुनें",
     selectWard: "कृपया अपना जीपी / वार्ड चुनें",
     selectBooth: "कृपया अपना चुनावी बूथ चुनें",
-    sharePhone: "आगे की अपडेट प्राप्त करने के लिए, कृपया अपना मोबाइल नंबर साझा करें।",
+    sharePhone: "अपना मोबाइल नंबर साझा करें",
     chooseList: "सूची चुनें",
     searchBlocks: "ब्लॉक खोजें...",
     searchWards: "वार्ड खोजें...",
     searchBooths: "बूथ खोजें...",
     noResults: "कोई परिणाम नहीं मिला",
-    typePhone: "आगे की अपडेट प्राप्त करने के लिए, कृपया अपना मोबाइल नंबर साझा करें।",
+    typePhone: "अपना फोन नंबर टाइप करें...",
     typeExperience: "अपना अनुभव टाइप करें...",
-    thankYou: "अपना अनुभव हमारे साथ साझा करने के लिए धन्यवाद! कृपया निर्धारित तिथि पर शिविर में उपस्थित हों।",
+    thankYou: "अपना अनुभव हमारे साथ साझा करने के लिए धन्यवाद!",
     moreDetailsQuestion: '"हमारा पाड़ा हमारा समाधान" के बारे में और जानना चाहते हैं?',
     yes: "हाँ",
     no: "नहीं",
-    thankYouForUsing: "हमारी सेवा का उपयोग करने के लिए धन्यवाद! कृपया निर्धारित तिथि पर शिविर में उपस्थित हों।",
+    thankYouForUsing: "हमारी सेवा का उपयोग करने के लिए धन्यवाद!",
     qRecordedPriorities: "क्या आप अपने बूथ क्षेत्र के सबसे महत्वपूर्ण कार्य/परियोजनाओं को प्राथमिकता के आधार पर दर्ज कर पाए?",
     qOverallExperience: "‘हमारा पाड़ा हमारा समाधान’ कैंप में आपका समग्र अनुभव कैसा रहा?",
     qInformedProjects: "क्या इस कैंप में आपको सभी परियोजनाओं के बारे में विस्तृत रूप से बताया गया?",
@@ -143,16 +143,12 @@ const translations = {
     surveyTitle: "अपना अनुभव साझा करें",
     surveySubtitle: "कृपया निम्न प्रश्नों के उत्तर दें",
   },
- }
- 
+}
 
 let userData: UserData | null = null
 
 function t<K extends keyof (typeof translations)["English"]>(key: K): string {
-  // normalize arbitrary language inputs to our translation keys
   const raw = (typeof userData?.language === "string" ? userData?.language : "") || "English"
-
-  // map common variants to our keys
   const normalized =
     raw.trim() === "English" || raw.trim().toLowerCase().startsWith("en")
       ? "English"
@@ -165,12 +161,15 @@ function t<K extends keyof (typeof translations)["English"]>(key: K): string {
   const enPack = translations["English"]
   const langPack = (translations as any)?.[normalized] as (typeof translations)["English"] | undefined
 
-  // primary from normalized lang, fallback to English, final fallback to key string
-  const fromLang = langPack?.[key]
-  const fromEn = enPack?.[key]
+  const candidate = langPack ? (langPack as any)[key] : undefined
+  const isMissing =
+    candidate === undefined || candidate === null || (typeof candidate === "string" && candidate.trim().length === 0)
 
-  // If both are falsy (shouldn't happen), return the key name
-  return (fromLang ?? fromEn ?? String(key)) as string
+  if (!isMissing) {
+    return candidate as string
+  }
+  const enVal = (enPack as any)[key]
+  return (typeof enVal === "string" && enVal.trim().length > 0 ? enVal : String(key)) as string
 }
 
 export default function WhatsAppChat() {
@@ -220,7 +219,6 @@ export default function WhatsAppChat() {
   }, [messages])
 
   useEffect(() => {
-    // Initial welcome message
     const now = new Date()
     const hours = now.getHours().toString().padStart(2, "0")
     const minutes = now.getMinutes().toString().padStart(2, "0")
@@ -230,7 +228,7 @@ export default function WhatsAppChat() {
       id: "1",
       text: "",
       isUser: false,
-      timestamp: currentTime, // current time here
+      timestamp: currentTime,
       isWelcome: true,
       hasButtons: true,
       buttons: ["English", "বাংলা", "हिंदी"],
@@ -443,11 +441,10 @@ export default function WhatsAppChat() {
       }, 1000)
     } else if (option === t("option2")) {
       setTimeout(() => {
-        addMessage(t("sharePhone"), false)
-        setCurrentStep("experiencePhone")
-      }, 1000)
+        setShowSurvey(true)
+        setCurrentStep("survey")
+      }, 400)
     } else {
-      // Fallback: default to experience path if an unrecognized option arrives
       setTimeout(() => {
         addMessage(t("sharePhone"), false)
         setCurrentStep("phone")
@@ -503,18 +500,14 @@ export default function WhatsAppChat() {
     addMessage(getLocalizedName(booth), true)
     setShowBoothList(false)
     setSearchTerm("")
-
-    // Fetch and display camp details before asking for phone
     ;(async () => {
-      const wardId = userDataState.wardId // ward already selected earlier
+      const wardId = userDataState.wardId
       const boothId = booth.id
       const lang = userDataState.language
       const campMessage = await fetchCampDetails(wardId, boothId, lang)
       addMessage(campMessage, false)
 
       setTimeout(() => {
-        // You can change this copy if you want a longer string:
-        // e.g. "For more information, please share your mobile number"
         addMessage(t("sharePhone"), false)
         setCurrentStep("phone")
       }, 1000)
@@ -530,7 +523,6 @@ export default function WhatsAppChat() {
       addMessage(inputValue, true)
       setInputValue("")
 
-      // Save only; do not display camp details again
       try {
         setLoading(true)
         const response = await fetch("/api/save-user-data", {
@@ -541,7 +533,6 @@ export default function WhatsAppChat() {
         const data = await response.json()
         if (!data.success) throw new Error(data.error)
 
-        // Proceed with the rest of the flow as before
         setTimeout(() => {
           addMessage(t("moreDetailsQuestion"), false, true, [t("yes"), t("no")])
           setCurrentStep("continue")
@@ -607,7 +598,7 @@ export default function WhatsAppChat() {
     if (!allSurveyAnswered) return
     const payload = {
       name: "",
-      phone: userDataState.phone,
+      phone: "", // send blank phone by default for Share Experience
       language: userDataState.language,
       answers: survey,
     }
@@ -969,8 +960,14 @@ export default function WhatsAppChat() {
           <div className="bg-white rounded-t-3xl md:rounded-3xl p-6 w-full max-w-md max-h-[88vh] flex flex-col shadow-2xl animate-in slide-in-from-bottom duration-300">
             <div className="flex items-center justify-between mb-3">
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-gray-900 text-pretty text-balance">{t("surveyTitle")}</h3>
-                <p className="text-sm text-gray-600 mt-1">{t("surveySubtitle")}</p>
+                <h3 className="text-xl font-semibold text-gray-900 text-pretty text-balance">
+                  {t("surveyTitle") || (translations as any)["English"]?.surveyTitle || "Share your experience"}
+                </h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  {t("surveySubtitle") ||
+                    (translations as any)["English"]?.surveySubtitle ||
+                    "Please answer the following questions"}
+                </p>
               </div>
               <Button
                 variant="ghost"
@@ -987,7 +984,9 @@ export default function WhatsAppChat() {
               {/* Q1 Yes/No */}
               <div>
                 <p className="font-semibold text-gray-800 mb-3 text-pretty">
-                  {t("qRecordedPriorities") || translations["English"].qRecordedPriorities}
+                  {t("qRecordedPriorities") ||
+                    (translations as any)["English"]?.qRecordedPriorities ||
+                    "Were you able to document the most important works/projects in your booth area by priority?"}
                 </p>
                 <div className="flex flex-col gap-3">
                   <SurveyPill
@@ -1008,7 +1007,9 @@ export default function WhatsAppChat() {
               {/* Q2 4-point */}
               <div>
                 <p className="font-semibold text-gray-800 mb-3 text-pretty">
-                  {t("qOverallExperience") || translations["English"].qOverallExperience}
+                  {t("qOverallExperience") ||
+                    (translations as any)["English"]?.qOverallExperience ||
+                    "How was your overall experience at the Amader Para Amader Samadhan camp?"}
                 </p>
                 <div className="flex flex-col gap-3">
                   <SurveyPill
@@ -1041,7 +1042,9 @@ export default function WhatsAppChat() {
               {/* Q3 Yes/No */}
               <div>
                 <p className="font-semibold text-gray-800 mb-3 text-pretty">
-                  {t("qInformedProjects") || translations["English"].qInformedProjects}
+                  {t("qInformedProjects") ||
+                    (translations as any)["English"]?.qInformedProjects ||
+                    "Were you broadly informed about all projects at this camp?"}
                 </p>
                 <div className="flex flex-col gap-3">
                   <SurveyPill
@@ -1062,7 +1065,9 @@ export default function WhatsAppChat() {
               {/* Q4 4-point */}
               <div>
                 <p className="font-semibold text-gray-800 mb-3 text-pretty">
-                  {t("qBoothFacility") || translations["English"].qBoothFacility}
+                  {t("qBoothFacility") ||
+                    (translations as any)["English"]?.qBoothFacility ||
+                    "How was the availability and use of booth-level facilities?"}
                 </p>
                 <div className="flex flex-col gap-3">
                   <SurveyPill

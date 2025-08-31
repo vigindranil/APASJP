@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import * as db from "@/lib/database"
+import { executeWrite } from "@/lib/database"
 
 type SurveyAnswers = {
   recorded_priorities?: "yes" | "no"
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
       ", ",
     )}, NOW())`
 
-    const result = await db.executeWrite(sql, values)
+    const result = await executeWrite(sql, values)
     const experienceId = result.insertId
 
     const thankYou: Record<string, string> = {
