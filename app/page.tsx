@@ -50,7 +50,7 @@ const translations = {
     selectBlock: "Please select your Block / Municipality",
     selectWard: "Please select your GP / Ward",
     selectBooth: "Please select your Electoral Booth",
-    sharePhone: "Share your Mobile Number",
+    sharePhone: "To receive further updates, please share your mobile number.",
     chooseList: "Choose list",
     searchBlocks: "Search blocks...",
     searchWards: "Search wards...",
@@ -62,7 +62,7 @@ const translations = {
     moreDetailsQuestion: 'Know more details about "Amader Para Amader Samadhan"?',
     yes: "Yes",
     no: "No",
-    thankYouForUsing: "Thank you for using our service!",
+    thankYouForUsing: "Thank you for using our service! Kindly attend the camp on the scheduled date",
     qRecordedPriorities: "Were you able to document the most important works/projects in your booth area by priority?",
     qOverallExperience: "How was your overall experience at the Amader Para Amader Samadhan camp?",
     qInformedProjects: "Were you broadly informed about all projects at this camp?",
@@ -84,7 +84,7 @@ const translations = {
     selectBlock: "অনুগ্রহ করে আপনার ব্লক / পৌরসভা নির্বাচন করুন",
     selectWard: "অনুগ্রহ করে আপনার জিপি / ওয়ার্ড নির্বাচন করুন",
     selectBooth: "অনুগ্রহ করে আপনার নির্বাচনী বুথ নির্বাচন করুন",
-    sharePhone: "আপনার মোবাইল নম্বর শেয়ার করুন",
+    sharePhone: "পরবর্তী আপডেট পেতে, দয়া করে আপনার মোবাইল নম্বর শেয়ার করুন।",
     chooseList: "তালিকা বেছে নিন",
     searchBlocks: "ব্লক খুঁজুন...",
     searchWards: "ওয়ার্ড খুঁজুন...",
@@ -96,7 +96,7 @@ const translations = {
     moreDetailsQuestion: '"আমাদের পাড়া আমাদের সমাধান" সম্পর্কে আরও বিস্তারিত জানতে চান?',
     yes: "হ্যাঁ",
     no: "না",
-    thankYouForUsing: "আমাদের সেবা ব্যবহার করার জন্য ধন্যবাদ!",
+    thankYouForUsing: "আমাদের সেবা ব্যবহার করার জন্য ধন্যবাদ! অনুগ্রহ করে নির্ধারিত তারিখে ক্যাম্পে উপস্থিত থাকুন।",
     qRecordedPriorities: "আপনি আপনার বুথ এলাকার সবচেয়ে গুরুত্বপূর্ণ কাজ / প্রকল্প অগ্রাধিকারের ভিত্তিতে নথিভুক্ত করতে পেরেছেন কী না?",
     qOverallExperience: "আমাদের পাড়া আমাদের সমাধান ক্যাম্পে এসে আপনার সামগ্রিক অভিজ্ঞতা কেমন হলো?",
     qInformedProjects: "এই ক্যাম্পে সমস্ত প্রকল্প সম্পর্কে আপনাকে বিস্তৃত রূপে জানানো হয়েছে কী না?",
@@ -118,7 +118,7 @@ const translations = {
     selectBlock: "कृपया अपना ब्लॉक / नगरपालिका चुनें",
     selectWard: "कृपया अपना जीपी / वार्ड चुनें",
     selectBooth: "कृपया अपना चुनावी बूथ चुनें",
-    sharePhone: "अपना मोबाइल नंबर साझा करें",
+    sharePhone: "आगे की अपडेट प्राप्त करने के लिए, कृपया अपना मोबाइल नंबर साझा करें।",
     chooseList: "सूची चुनें",
     searchBlocks: "ब्लॉक खोजें...",
     searchWards: "वार्ड खोजें...",
@@ -130,7 +130,7 @@ const translations = {
     moreDetailsQuestion: '"हमारा पाड़ा हमारा समाधान" के बारे में और जानना चाहते हैं?',
     yes: "हाँ",
     no: "नहीं",
-    thankYouForUsing: "हमारी सेवा का उपयोग करने के लिए धन्यवाद!",
+    thankYouForUsing: "हमारी सेवा का उपयोग करने के लिए धन्यवाद! कृपया निर्धारित तिथि पर शिविर में उपस्थित हों।",
     qRecordedPriorities: "क्या आप अपने बूथ क्षेत्र के सबसे महत्वपूर्ण कार्य/परियोजनाओं को प्राथमिकता के आधार पर दर्ज कर पाए?",
     qOverallExperience: "‘हमारा पाड़ा हमारा समाधान’ कैंप में आपका समग्र अनुभव कैसा रहा?",
     qInformedProjects: "क्या इस कैंप में आपको सभी परियोजनाओं के बारे में विस्तृत रूप से बताया गया?",
@@ -141,9 +141,10 @@ const translations = {
     ratingPoor: "खराब",
     submit: "सबमिट करें",
     surveyTitle: "अपना अनुभव साझा करें",
-    surveySubtitle: "कृपया निम्न प्रश्नों के उत्तर दें",
+    surveySubtitle: "कृपया निम्न प्रश्नों के उत्तर दें"
   },
-}
+ }
+ 
 
 let userData: UserData | null = null
 
