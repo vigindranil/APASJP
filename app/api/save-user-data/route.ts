@@ -82,6 +82,7 @@ export async function POST(request: Request) {
       [userData.wardId, userData.boothId], // 👈 passing ward_id and boothCode
     )
 
+    console.log("Lan: " +userData.language );
     if (!Array.isArray(campResult) || campResult.length === 0) {
       return NextResponse.json({ success: false, error: "No camp data found" }, { status: 404 })
     }
@@ -92,9 +93,9 @@ export async function POST(request: Request) {
 
     let campMessage = `Camp Details:\nDate: ${formattedCampDate}\nVenue: ${campData.venue}\nHabitation: ${campData.habitation}\nAssembly Constituency: ${campData.ac}\nBlock: ${campData.block_name}\nWard/GP: ${campData.ward_name}\nElectoral Booth: ${campData.booth_name}`
 
-    if (userData.language === "bn") {
+    if (userData.language === "বাংলা") {
       campMessage = `ক্যাম্পের বিবরণ:\nতারিখ: ${formattedCampDate}\nস্থান: ${campData.venue_bn || campData.venue}\nবসতি: ${campData.habitation_bn || campData.habitation}\nবিধানসভা কেন্দ্র: ${campData.ac_bn || campData.ac}\nব্লক: ${campData.block_name_bn || campData.block_name}\nওয়ার্ড/জিপি: ${campData.ward_name_bn || campData.ward_name}\nনির্বাচনী বুথ: ${campData.booth_name_bn || campData.booth_name}`
-    } else if (userData.language === "np") {
+    } else if (userData.language === "हिंदी") {
       campMessage = `शिविर विवरण:\nमिति: ${formattedCampDate}\nस्थान: ${campData.venue_np || campData.venue}\nबसोबास: ${campData.habitation_np || campData.habitation}\nविधानसभा क्षेत्र: ${campData.ac_np || campData.ac}\nब्लक: ${campData.block_name_np || campData.block_name}\nवार्ड/जीपी: ${campData.ward_name_np || campData.ward_name}\nनिर्वाचन बूथ: ${campData.booth_name_np || campData.booth_name}`
     }
 
