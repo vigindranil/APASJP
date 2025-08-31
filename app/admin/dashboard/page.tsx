@@ -11,6 +11,7 @@ interface DashboardStats {
   totalExperiences: number
   todayQueries: number
   todayExperiences: number
+  campCount?: number // optional to avoid breaking while loading
 }
 
 export default function AdminDashboard() {
@@ -19,6 +20,7 @@ export default function AdminDashboard() {
     totalExperiences: 0,
     todayQueries: 0,
     todayExperiences: 0,
+    campCount: 0,
   })
   const [loading, setLoading] = useState(true)
   const router = useRouter()
@@ -33,7 +35,39 @@ export default function AdminDashboard() {
 
     // Fetch dashboard statistics
     fetchStats()
+    fetchCampCount()
   }, [router])
+
+  const fetchCampCount = async () => {
+    try {
+      // Fetch stats
+      const statsRes = await fetch("/api/admin/stats")
+      if (statsRes.ok) {
+        const data = await statsRes.json()
+        setStats((prev) => ({ ...prev, ...data }))
+      }
+  
+      // Fetch camp count
+      const campsRes = await fetch("/api/admin/camps/count")
+      if (campsRes.ok) {
+        const campsJson = await campsRes.json()
+        const campCount =
+          typeof campsJson?.data?.count === "number"
+            ? campsJson.data.count
+            : typeof campsJson?.count === "number"
+            ? campsJson.count
+            : 0
+        setStats((prev) => ({ ...prev, campCount }))
+      } else {
+        console.error("Camp count API failed:", campsRes.status)
+      }
+    } catch (error) {
+      console.error("Error fetching stats:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+  
 
   const fetchStats = async () => {
     try {
@@ -116,6 +150,25 @@ export default function AdminDashboard() {
 
         {/* Statistics Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <Card
+            className="group cursor-pointer bg-white/80 backdrop-blur-sm border-white/20 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden relative"
+            onClick={() => navigateToDetails("camps")}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-indigo-500/5 group-hover:from-blue-500/10 group-hover:to-indigo-500/10 transition-all duration-300"></div>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 relative z-10">
+              <CardTitle className="text-sm font-semibold text-slate-600">All Camps</CardTitle>
+              <div className="bg-gradient-to-r from-blue-500 to-indigo-600 p-2.5 rounded-lg shadow-md">
+                <Calendar className="h-4 w-4 text-white" />
+              </div>
+            </CardHeader>
+            <CardContent className="relative z-10">
+              <div className="text-3xl font-bold text-slate-800 mb-2">{(stats.campCount ?? 0).toLocaleString()}</div>
+              <p className="text-xs text-slate-500 flex items-center">
+                <Eye className="inline w-3 h-3 mr-1.5" />
+                Click to open camp search
+              </p>
+            </CardContent>
+          </Card>
           <Card
             className="group cursor-pointer bg-white/80 backdrop-blur-sm border-white/20 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden relative"
             onClick={() => navigateToDetails("queries")}
@@ -248,6 +301,7 @@ export default function AdminDashboard() {
                 </Button>
               </CardContent>
             </Card>
+         
           </div>
         </div>
 

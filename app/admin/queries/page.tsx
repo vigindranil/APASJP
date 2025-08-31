@@ -141,7 +141,7 @@ export default function UserQueriesPage() {
         return "bg-blue-100 text-blue-800"
       case "bn":
         return "bg-green-100 text-green-800"
-      case "np":
+      case "hi":
         return "bg-orange-100 text-orange-800"
       default:
         return "bg-gray-100 text-gray-800"
@@ -154,8 +154,8 @@ export default function UserQueriesPage() {
         return "English"
       case "bn":
         return "Bengali"
-      case "np":
-        return "Nepali"
+      case "hi":
+        return "Hindi"
       default:
         return language
     }
@@ -326,7 +326,7 @@ export default function UserQueriesPage() {
                   <SelectItem value="all">All Languages</SelectItem>
                   <SelectItem value="en">English</SelectItem>
                   <SelectItem value="bn">Bengali</SelectItem>
-                  <SelectItem value="np">Nepali</SelectItem>
+                  <SelectItem value="hi">Hindi</SelectItem>
                 </SelectContent>
               </Select>
 

@@ -18,9 +18,9 @@ export async function GET(request: NextRequest) {
         ud.id,
         ud.name,
         ud.phone,
-        b.name as block_name,
-        w.name as ward_name,
-        eb.name as booth_name,
+        b.bum_name_en as block_name,
+        w.ward_name_en as ward_name,
+        eb.booth_name_en as booth_name,
         ud.language,
         ud.created_at,
         cd.camp_date,
@@ -28,10 +28,10 @@ export async function GET(request: NextRequest) {
         cd.habitation,
         cd.ac
       FROM user_data ud
-      LEFT JOIN blocks b ON ud.block_id = b.id
-      LEFT JOIN wards w ON ud.ward_id = w.id
-      LEFT JOIN electoral_booths eb ON ud.booth_id = eb.id
-      LEFT JOIN camp_details cd ON cd.electoral_booth_id = eb.id
+      LEFT JOIN tbl_block_ulb_mstr b ON ud.block_id = b.bum_id
+      LEFT JOIN tbl_ward_ulb_mstr w ON ud.ward_id = w.ward_id
+      LEFT JOIN tbl_booth_ulb_mstr eb ON ud.booth_id = eb.booth_id
+      LEFT JOIN camp_details cd ON cd.electoral_booth_id = eb.booth_id
       WHERE 1=1
     `
 
@@ -73,7 +73,7 @@ export async function GET(request: NextRequest) {
 
     const results = await executeQuery(query, params)
 
-    if (!results || results.length === 0) {
+    if (!Array.isArray(results) || results.length === 0) {
       return NextResponse.json({ error: "No data found matching the criteria" }, { status: 404 })
     }
 
@@ -91,8 +91,8 @@ export async function GET(request: NextRequest) {
           ? "English"
           : row.language === "bn"
             ? "Bengali"
-            : row.language === "np"
-              ? "Nepali"
+            : row.language === "hi"
+              ? "Hindi"
               : row.language,
       "Query Date": new Date(row.created_at).toLocaleDateString(),
       "Camp Date": row.camp_date ? new Date(row.camp_date).toLocaleDateString() : "N/A",
