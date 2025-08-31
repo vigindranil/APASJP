@@ -11,7 +11,7 @@ export async function GET(request: Request) {
     }
 
     const booths = await executeQuery(
-      "SELECT id, name, name_bn, name_np FROM electoral_booths WHERE ward_id = ? ORDER BY name",
+      "SELECT id, name, name_bn, name_np FROM tbl_electoral_booth_mstr WHERE ward_id = ? ORDER BY name",
       [Number.parseInt(wardId)],
     )
 

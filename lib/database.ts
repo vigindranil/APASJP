@@ -1,11 +1,22 @@
 import mysql from "mysql2/promise"
 
+// const dbConfig = {
+//   host: "public-primary-mysql-inmumbaizone2-189276-1646600.db.onutho.com",
+//   port: 3306,
+//   user: "dbadmin",
+//   password: "g@E3J@6g57@fEbX@",
+//   database: "db_apas",
+//   ssl: {
+//     rejectUnauthorized: false,
+//   },
+// }
+
 const dbConfig = {
-  host: "public-primary-mysql-inmumbaizone2-189276-1646600.db.onutho.com",
+  host: "150.241.245.34",
   port: 3306,
-  user: "dbadmin",
-  password: "g@E3J@6g57@fEbX@",
-  database: "db_apas",
+  user: "viuser",
+  password: "Vyoma@2018",
+  database: "db_wb_apasjp",
   ssl: {
     rejectUnauthorized: false,
   },

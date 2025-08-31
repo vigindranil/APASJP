@@ -10,7 +10,7 @@ export async function GET(request: Request) {
       return NextResponse.json({ success: false, error: "Block ID is required" }, { status: 400 })
     }
 
-    const wards = await executeQuery("SELECT id, block_id, name, name_bn, name_np FROM wards where block_id = ? ORDER BY name", [
+    const wards = await executeQuery("SELECT id, block_id, name, name_bn, name_np FROM tbl_gp_ward_mstr where block_id = ? ORDER BY name", [
       Number.parseInt(blockId),
     ])
 

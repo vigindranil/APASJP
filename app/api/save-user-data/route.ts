@@ -42,33 +42,44 @@ export async function POST(request: Request) {
 
     const campResult = await executeQuery(
       `
-      SELECT 
-        cd.camp_date,
-        cd.venue,
-        cd.venue_bn,
-        cd.venue_np,
-        cd.habitation,
-        cd.habitation_bn,
-        cd.habitation_np,
-        cd.ac,
-        cd.ac_bn,
-        cd.ac_np,
-        b.name as block_name,
-        b.name_bn as block_name_bn,
-        b.name_np as block_name_np,
-        w.name as ward_name,
-        w.name_bn as ward_name_bn,
-        w.name_np as ward_name_np,
-        eb.name as booth_name,
-        eb.name_bn as booth_name_bn,
-        eb.name_np as booth_name_np
-      FROM camp_details cd
-      JOIN electoral_booths eb ON cd.electoral_booth_id = eb.id
-      JOIN wards w ON cd.ward_id = w.id
-      JOIN blocks b ON cd.block_id = b.id
-      WHERE cd.electoral_booth_id = ?
-    `,
-      [userData.boothId],
+      SELECT
+        cd.cs_camp_date AS camp_date,
+        cd.cs_venue AS venue,
+        cd.cs_venue_bn AS venue_bn,
+        cd.cs_venue_hi AS venue_np,
+        cd.cs_habitation_name AS habitation,
+        cd.cs_habitation_name_bn AS habitation_bn,
+        cd.cs_habitation_name_hi AS habitation_np,
+        cd.cs_assembly_name AS ac,
+        cd.cs_assembly_name_bn AS ac_bn,
+        cd.cs_assembly_name_hi AS ac_np,
+        cd.cs_block_ulb_name as block_name,
+        cd.cs_block_ulb_name_bn as block_name_bn,
+        cd.cs_block_ulb_name_hi as block_name_hi,
+        cd.cs_gp_ward_name as ward_name,
+        cd.cs_gp_ward_name_bn as ward_name_bn,
+        cd.cs_gp_ward_name_hi as ward_name_hi,
+        eb.ebm_booth_name_en as booth_name,
+        eb.ebm_booth_name_bn as booth_name_bn,
+        eb.ebm_booth_name_hi as booth_name_hi
+      FROM (
+        SELECT DISTINCT value, cs_id
+        FROM (
+          SELECT cs_id, cs_booth_1 AS value FROM tbl_camp_schedule
+          UNION ALL
+          SELECT cs_id, cs_booth_2 FROM tbl_camp_schedule
+          UNION ALL
+          SELECT cs_id, cs_booth_3 FROM tbl_camp_schedule
+        ) AS combined
+        WHERE value IS NOT NULL
+      ) T
+      INNER JOIN tbl_camp_schedule cd ON cd.cs_id = T.cs_id
+      INNER JOIN tbl_electoral_booth_mstr eb 
+        ON eb.ebm_booth_code = T.value 
+        AND eb.ebm_gp_ward_id = cd.cs_gp_ward_id
+      WHERE cd.cs_gp_ward_id = ? AND eb.ebm_booth_code = ?
+      `,
+      [userData.wardId, userData.boothId], // 👈 passing ward_id and boothCode
     )
 
     if (!Array.isArray(campResult) || campResult.length === 0) {
